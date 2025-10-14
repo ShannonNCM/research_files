@@ -1,0 +1,15 @@
+model: "MACE"
+num_channels: 32
+max_L: 0
+r_max: 4.0
+name: "mace_test"
+train_file: "train.xyz"
+valid_fraction: 0.1
+test_file: "test.xyz"
+energy_key: "energy"
+forces_key: "forces"
+E0: "average"
+batch_size: 20
+max_num_epochs: 5
+device: cpu
+seed: 123
