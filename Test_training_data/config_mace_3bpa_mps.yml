@@ -9,7 +9,8 @@ test_file: "test.xyz"
 energy_key: "energy"
 forces_key: "forces"
 E0: "average"
-batch_size: 20
-max_num_epochs: 10
-device: cpu
+batch_size: 10
+max_num_epochs: 5
+device: mps
 seed: 123
+default_dtype: "float32"
