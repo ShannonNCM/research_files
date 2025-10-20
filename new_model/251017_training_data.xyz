@@ -1,11 +1,11 @@
 1
-config_type=Fe Lattice="18.000000000 0.0 0.0 0.0 18.000000000 0.0 0.0 0.0 18.0000000" Properties=species:S:1:pos:R:3:forces:R:3 energy=-3.28308100 pbc="T T T"
+config_type=IsolatedAtom Lattice="18.000000000 0.0 0.0 0.0 18.000000000 0.0 0.0 0.0 18.0000000" Properties=species:S:1:pos:R:3:forces:R:3 energy=-3.28308100 pbc="T T T"
 Fe 0.00000 0.00000 0.00000 0.000000 0.000000 0.000000
 1
-config_type=Si Lattice="18.000000000 0.0 0.0 0.0 18.000000000 0.0 0.0 0.0 18.0000000" Properties=species:S:1:pos:R:3:forces:R:3 energy=-0.81049333 pbc="T T T"
+config_type=IsolatedAtom Lattice="18.000000000 0.0 0.0 0.0 18.000000000 0.0 0.0 0.0 18.0000000" Properties=species:S:1:pos:R:3:forces:R:3 energy=-0.81049333 pbc="T T T"
 Si 0.00000 0.00000 0.00000 0.000000 0.000000 0.000000
 1
-config_type=B Lattice="18.000000000 0.0 0.0 0.0 18.000000000 0.0 0.0 0.0 18.0000000" Properties=species:S:1:pos:R:3:forces:R:3 energy=-0.27559471 pbc="T T T"
+config_type=IsolatedAtom Lattice="18.000000000 0.0 0.0 0.0 18.000000000 0.0 0.0 0.0 18.0000000" Properties=species:S:1:pos:R:3:forces:R:3 energy=-0.27559471 pbc="T T T"
 B 0.00000 0.00000 0.00000 0.000000 0.000000 0.000000
 10
 config_type=Fe5B1Si4 Lattice="9.000000000 0.0 0.0 0.0 9.000000000 0.0 0.0 0.0 9.000000000" Properties=species:S:1:pos:R:3:forces:R:3 energy=-44.58554767 pbc="T T T"
