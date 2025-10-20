@@ -214,3 +214,4 @@
 2025-10-19 22:41:58.104 DEBUG: Running inference on train_Default dataset
 2025-10-19 22:41:58.329 DEBUG: Plotting failed: too many indices for tensor of dimension 1
 2025-10-19 22:41:58.329 INFO: Done
+2025-10-19 23:52:25.785 INFO: Using CPU
