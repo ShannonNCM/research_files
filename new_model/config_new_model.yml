@@ -10,5 +10,5 @@ energy_key: "energy"
 forces_key: "forces"
 batch_size: 32
 max_num_epochs: 100
-device: cpu
+device: cuda
 seed: 123

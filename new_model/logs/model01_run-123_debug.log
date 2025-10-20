@@ -518,3 +518,56 @@
 2025-10-20 01:46:17.075 DEBUG: Plotting failed: too many indices for tensor of dimension 1
 2025-10-20 01:46:17.075 INFO: Done
 2025-10-20 01:46:17.247 INFO: Using CPU
+2025-10-20 18:43:50.224 INFO: ===========VERIFYING SETTINGS===========
+2025-10-20 18:43:50.224 INFO: MACE version: 0.3.14
+2025-10-20 18:43:50.224 DEBUG: Configuration: Namespace(config='config_new_model.yml', name='model01', seed=123, work_dir='.', log_dir='.\\logs', model_dir='.', checkpoints_dir='.\\checkpoints', results_dir='.\\results', downloads_dir='.\\downloads', device='cuda', default_dtype='float64', distributed=False, launcher='slurm', log_level='INFO', plot=True, plot_frequency=0, plot_interaction_e=False, error_table='PerAtomRMSE', model='MACE', r_max=4.0, radial_type='bessel', num_radial_basis=8, num_cutoff_basis=5, pair_repulsion=False, distance_transform='None', apply_cutoff=True, use_last_readout_only=False, use_embedding_readout=False, interaction='RealAgnosticResidualInteractionBlock', interaction_first='RealAgnosticResidualInteractionBlock', max_ell=3, correlation=3, use_reduced_cg=False, use_so3=False, use_agnostic_product=False, num_interactions=2, MLP_irreps='16x0e', radial_MLP='[64, 64, 64]', hidden_irreps=32x0e, edge_irreps=None, num_channels=32, max_L=0, gate='silu', scaling='rms_forces_scaling', avg_num_neighbors=1, compute_avg_num_neighbors=True, compute_stress=False, compute_forces=True, compute_polarizability=<function str2bool at 0x0000026AE34C7E50>, compute_atomic_dipole=<function str2bool at 0x0000026AE34C7E50>, train_file='train_01.xyz', valid_file=None, valid_fraction=0.01, test_file='test_01.xyz', test_dir=None, multi_processed_test=False, num_workers=0, pin_memory=True, atomic_numbers=None, mean=None, std=None, statistics_file=None, les_arguments=None, E0s=None, pseudolabel_replay=False, foundation_filter_elements=True, heads=None, multiheads_finetuning=True, foundation_head=None, weight_pt_head=1.0, real_pt_data_ratio_threshold=0.1, num_samples_pt=10000, force_mh_ft_lr=False, subselect_pt='random', filter_type_pt='none', allow_random_padding_pt=True, pt_train_file=None, pt_valid_file=None, foundation_model_elements=False, keep_isolated_atoms=False, energy_key='energy', forces_key='forces', virials_key='REF_virials', stress_key='REF_stress', dipole_key='dipole', polarizability_key='polarizability', head_key='head', charges_key='REF_charges', elec_temp_key='elec_temp', total_spin_key='total_spin', total_charge_key='total_charge', embedding_specs=None, skip_evaluate_heads='pt_head', loss='weighted', forces_weight=100.0, swa_forces_weight=100.0, energy_weight=1.0, swa_energy_weight=1000.0, virials_weight=1.0, swa_virials_weight=10.0, stress_weight=1.0, swa_stress_weight=10.0, dipole_weight=1.0, swa_dipole_weight=1.0, swa_polarizability_weight=1.0, polarizability_weight=1.0, config_type_weights='{"Default":1.0}', huber_delta=0.01, optimizer='adam', beta=0.9, batch_size=32, valid_batch_size=10, lr=0.01, swa_lr=0.001, weight_decay=5e-07, amsgrad=True, scheduler='ReduceLROnPlateau', lr_factor=0.8, scheduler_patience=50, lr_scheduler_gamma=0.9993, swa=False, start_swa=None, lbfgs=False, ema=False, ema_decay=0.99, max_num_epochs=100, patience=2048, foundation_model=None, foundation_model_readout=True, eval_interval=1, keep_checkpoints=False, save_all_checkpoints=False, restart_latest=False, save_cpu=False, clip_grad=10.0, dry_run=False, enable_cueq=False, only_cueq=False, enable_oeq=False, wandb=False, wandb_dir=None, wandb_project='', wandb_entity='', wandb_name='', wandb_log_hypers=['num_channels', 'max_L', 'correlation', 'lr', 'swa_lr', 'weight_decay', 'batch_size', 'max_num_epochs', 'start_swa', 'energy_weight', 'forces_weight'], key_specification=KeySpecification(info_keys={'energy': 'energy', 'stress': 'REF_stress', 'virials': 'REF_virials', 'dipole': 'dipole', 'head': 'head', 'elec_temp': 'elec_temp', 'total_charge': 'total_charge', 'polarizability': 'polarizability', 'total_spin': 'total_spin'}, arrays_keys={'forces': 'forces', 'charges': 'REF_charges'}))
+2025-10-20 18:43:50.290 INFO: CUDA version: 12.6, CUDA device: 0
+2025-10-20 18:43:50.341 DEBUG: Popen(['git', 'version'], cwd=f:\Shannon\Github\research_files\new_model, stdin=None, shell=False, universal_newlines=False)
+2025-10-20 18:43:50.373 DEBUG: Popen(['git', 'version'], cwd=f:\Shannon\Github\research_files\new_model, stdin=None, shell=False, universal_newlines=False)
+2025-10-20 18:43:50.407 DEBUG: sys.platform='win32', git_executable='git'
+2025-10-20 18:43:50.407 DEBUG: Popen(['git', 'cat-file', '--batch-check'], cwd=f:\Shannon\Github\research_files, stdin=<valid stream>, shell=False, universal_newlines=False)
+2025-10-20 18:43:50.440 DEBUG: Current Git commit: 96feec6857c663e79ef05e7caeaa8c3e0b1cbb2b
+2025-10-20 18:43:50.440 INFO: ===========LOADING INPUT DATA===========
+2025-10-20 18:43:50.440 INFO: Using heads: ['Default']
+2025-10-20 18:43:50.440 INFO: Using the key specifications to parse data:
+2025-10-20 18:43:50.440 INFO: Default: KeySpecification(info_keys={'energy': 'energy', 'stress': 'REF_stress', 'virials': 'REF_virials', 'dipole': 'dipole', 'head': 'head', 'elec_temp': 'elec_temp', 'total_charge': 'total_charge', 'polarizability': 'polarizability', 'total_spin': 'total_spin'}, arrays_keys={'forces': 'forces', 'charges': 'REF_charges'})
+2025-10-20 18:43:50.440 INFO: =============    Processing head Default     ===========
+2025-10-20 18:43:50.440 DEBUG: Loading training file: train_01.xyz
+2025-10-20 18:43:50.540 WARNING: Since ASE version 3.23.0b1, using energy_key 'energy' is no longer safe when communicating between MACE and ASE. We recommend using a different key, rewriting 'energy' to 'REF_energy'. You need to use --energy_key='REF_energy' to specify the chosen key name.
+2025-10-20 18:43:50.575 WARNING: Since ASE version 3.23.0b1, using forces_key 'forces' is no longer safe when communicating between MACE and ASE. We recommend using a different key, rewriting 'forces' to 'REF_forces'. You need to use --forces_key='REF_forces' to specify the chosen key name.
+2025-10-20 18:43:50.614 WARNING: Configuration '0' is marked as 'IsolatedAtom' but does not contain an energy. Zero energy will be used.
+2025-10-20 18:43:50.615 WARNING: Configuration '1' is marked as 'IsolatedAtom' but does not contain an energy. Zero energy will be used.
+2025-10-20 18:43:50.615 WARNING: Configuration '2' is marked as 'IsolatedAtom' but does not contain an energy. Zero energy will be used.
+2025-10-20 18:43:50.616 INFO: Using isolated atom energies from training file
+2025-10-20 18:43:50.622 INFO: Training set 1/1 [energy: 247, stress: 0, virials: 0, dipole components: 0, head: 247, elec_temp: 0, total_charge: 0, polarizability: 0, total_spin: 0, forces: 247, charges: 0]
+2025-10-20 18:43:50.623 INFO: Total Training set [energy: 247, stress: 0, virials: 0, dipole components: 0, head: 247, elec_temp: 0, total_charge: 0, polarizability: 0, total_spin: 0, forces: 247, charges: 0]
+2025-10-20 18:43:50.624 INFO: No validation set provided, splitting training data instead.
+2025-10-20 18:43:50.625 INFO: Using random 1% of training set for validation with following indices: [153, 205]
+2025-10-20 18:43:50.625 INFO: Random Split Training set [energy: 245, stress: 0, virials: 0, dipole components: 0, head: 245, elec_temp: 0, total_charge: 0, polarizability: 0, total_spin: 0, forces: 245, charges: 0]
+2025-10-20 18:43:50.625 INFO: Random Split Validation set [energy: 2, stress: 0, virials: 0, dipole components: 0, head: 2, elec_temp: 0, total_charge: 0, polarizability: 0, total_spin: 0, forces: 2, charges: 0]
+2025-10-20 18:43:50.757 WARNING: Since ASE version 3.23.0b1, using energy_key 'energy' is no longer safe when communicating between MACE and ASE. We recommend using a different key, rewriting 'energy' to 'REF_energy'. You need to use --energy_key='REF_energy' to specify the chosen key name.
+2025-10-20 18:43:50.811 WARNING: Since ASE version 3.23.0b1, using forces_key 'forces' is no longer safe when communicating between MACE and ASE. We recommend using a different key, rewriting 'forces' to 'REF_forces'. You need to use --forces_key='REF_forces' to specify the chosen key name.
+2025-10-20 18:43:50.870 INFO: Test set 1/1 [energy: 403, stress: 0, virials: 0, dipole components: 0, head: 403, elec_temp: 0, total_charge: 0, polarizability: 0, total_spin: 0, forces: 403, charges: 0]
+2025-10-20 18:43:50.872 INFO: Total Test set [energy: 403, stress: 0, virials: 0, dipole components: 0, head: 403, elec_temp: 0, total_charge: 0, polarizability: 0, total_spin: 0, forces: 403, charges: 0]
+2025-10-20 18:43:50.873 DEBUG: Element 26 found in 1 file. Using E0: 0.000000 eV
+2025-10-20 18:43:50.873 DEBUG: Element 14 found in 1 file. Using E0: 0.000000 eV
+2025-10-20 18:43:50.873 DEBUG: Element 5 found in 1 file. Using E0: 0.000000 eV
+2025-10-20 18:43:50.873 INFO: Total number of configurations: train=245, valid=2, tests=[Fe5B5_Default: 13, Fe5B4Si1_Default: 45, Fe5B3Si2_Default: 45, B2Fe30_Default: 15, Fe5B2Si3_Default: 45, Fe12Si4_Default: 11, Fe13Si1B1_Default: 229],
+2025-10-20 18:43:50.873 WARNING: Validation batch size (10) is larger than the number of validation data (2)
+2025-10-20 18:43:50.873 INFO: Atomic Numbers used: [5, 14, 26]
+2025-10-20 18:43:50.873 INFO: Atomic Energies used (z: eV) for head Default: {5: 0.0, 14: 0.0, 26: 0.0}
+2025-10-20 18:43:50.873 INFO: Processing datasets for head 'Default'
+2025-10-20 18:43:51.042 DEBUG: Successfully loaded dataset from ASE files: ['train_01.xyz']
+2025-10-20 18:43:51.042 INFO: Combining 1 list datasets for head 'Default'
+2025-10-20 18:43:51.042 INFO: Head 'Default' training dataset size: 245
+2025-10-20 18:43:51.042 INFO: Computing average number of neighbors
+2025-10-20 18:43:51.239 INFO: Average number of neighbors: 19.66931216931217
+2025-10-20 18:43:51.240 INFO: During training the following quantities will be reported: energy, forces
+2025-10-20 18:43:51.240 INFO: ===========MODEL DETAILS===========
+2025-10-20 18:43:51.290 INFO: Building model
+2025-10-20 18:43:51.290 INFO: Message passing with 32 channels and max_L=0 (32x0e)
+2025-10-20 18:43:51.290 INFO: 2 layers, each with correlation order: 3 (body order: 4) and spherical harmonics up to: l=3
+2025-10-20 18:43:51.290 INFO: 8 radial and 5 basis functions
+2025-10-20 18:43:51.290 INFO: Radial cutoff: 4.0 A (total receptive field for each atom: 8.0 A)
+2025-10-20 18:43:51.290 INFO: Distance transform for radial basis functions: None
+2025-10-20 18:43:51.290 INFO: Hidden irreps: 32x0e

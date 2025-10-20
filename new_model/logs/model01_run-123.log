@@ -324,3 +324,45 @@
 +-------------------+---------------------+------------------+-------------------+
 2025-10-20 01:46:17.075 INFO: Done
 2025-10-20 01:46:17.247 INFO: Using CPU
+2025-10-20 18:43:50.224 INFO: ===========VERIFYING SETTINGS===========
+2025-10-20 18:43:50.224 INFO: MACE version: 0.3.14
+2025-10-20 18:43:50.290 INFO: CUDA version: 12.6, CUDA device: 0
+2025-10-20 18:43:50.440 INFO: ===========LOADING INPUT DATA===========
+2025-10-20 18:43:50.440 INFO: Using heads: ['Default']
+2025-10-20 18:43:50.440 INFO: Using the key specifications to parse data:
+2025-10-20 18:43:50.440 INFO: Default: KeySpecification(info_keys={'energy': 'energy', 'stress': 'REF_stress', 'virials': 'REF_virials', 'dipole': 'dipole', 'head': 'head', 'elec_temp': 'elec_temp', 'total_charge': 'total_charge', 'polarizability': 'polarizability', 'total_spin': 'total_spin'}, arrays_keys={'forces': 'forces', 'charges': 'REF_charges'})
+2025-10-20 18:43:50.440 INFO: =============    Processing head Default     ===========
+2025-10-20 18:43:50.540 WARNING: Since ASE version 3.23.0b1, using energy_key 'energy' is no longer safe when communicating between MACE and ASE. We recommend using a different key, rewriting 'energy' to 'REF_energy'. You need to use --energy_key='REF_energy' to specify the chosen key name.
+2025-10-20 18:43:50.575 WARNING: Since ASE version 3.23.0b1, using forces_key 'forces' is no longer safe when communicating between MACE and ASE. We recommend using a different key, rewriting 'forces' to 'REF_forces'. You need to use --forces_key='REF_forces' to specify the chosen key name.
+2025-10-20 18:43:50.614 WARNING: Configuration '0' is marked as 'IsolatedAtom' but does not contain an energy. Zero energy will be used.
+2025-10-20 18:43:50.615 WARNING: Configuration '1' is marked as 'IsolatedAtom' but does not contain an energy. Zero energy will be used.
+2025-10-20 18:43:50.615 WARNING: Configuration '2' is marked as 'IsolatedAtom' but does not contain an energy. Zero energy will be used.
+2025-10-20 18:43:50.616 INFO: Using isolated atom energies from training file
+2025-10-20 18:43:50.622 INFO: Training set 1/1 [energy: 247, stress: 0, virials: 0, dipole components: 0, head: 247, elec_temp: 0, total_charge: 0, polarizability: 0, total_spin: 0, forces: 247, charges: 0]
+2025-10-20 18:43:50.623 INFO: Total Training set [energy: 247, stress: 0, virials: 0, dipole components: 0, head: 247, elec_temp: 0, total_charge: 0, polarizability: 0, total_spin: 0, forces: 247, charges: 0]
+2025-10-20 18:43:50.624 INFO: No validation set provided, splitting training data instead.
+2025-10-20 18:43:50.625 INFO: Using random 1% of training set for validation with following indices: [153, 205]
+2025-10-20 18:43:50.625 INFO: Random Split Training set [energy: 245, stress: 0, virials: 0, dipole components: 0, head: 245, elec_temp: 0, total_charge: 0, polarizability: 0, total_spin: 0, forces: 245, charges: 0]
+2025-10-20 18:43:50.625 INFO: Random Split Validation set [energy: 2, stress: 0, virials: 0, dipole components: 0, head: 2, elec_temp: 0, total_charge: 0, polarizability: 0, total_spin: 0, forces: 2, charges: 0]
+2025-10-20 18:43:50.757 WARNING: Since ASE version 3.23.0b1, using energy_key 'energy' is no longer safe when communicating between MACE and ASE. We recommend using a different key, rewriting 'energy' to 'REF_energy'. You need to use --energy_key='REF_energy' to specify the chosen key name.
+2025-10-20 18:43:50.811 WARNING: Since ASE version 3.23.0b1, using forces_key 'forces' is no longer safe when communicating between MACE and ASE. We recommend using a different key, rewriting 'forces' to 'REF_forces'. You need to use --forces_key='REF_forces' to specify the chosen key name.
+2025-10-20 18:43:50.870 INFO: Test set 1/1 [energy: 403, stress: 0, virials: 0, dipole components: 0, head: 403, elec_temp: 0, total_charge: 0, polarizability: 0, total_spin: 0, forces: 403, charges: 0]
+2025-10-20 18:43:50.872 INFO: Total Test set [energy: 403, stress: 0, virials: 0, dipole components: 0, head: 403, elec_temp: 0, total_charge: 0, polarizability: 0, total_spin: 0, forces: 403, charges: 0]
+2025-10-20 18:43:50.873 INFO: Total number of configurations: train=245, valid=2, tests=[Fe5B5_Default: 13, Fe5B4Si1_Default: 45, Fe5B3Si2_Default: 45, B2Fe30_Default: 15, Fe5B2Si3_Default: 45, Fe12Si4_Default: 11, Fe13Si1B1_Default: 229],
+2025-10-20 18:43:50.873 WARNING: Validation batch size (10) is larger than the number of validation data (2)
+2025-10-20 18:43:50.873 INFO: Atomic Numbers used: [5, 14, 26]
+2025-10-20 18:43:50.873 INFO: Atomic Energies used (z: eV) for head Default: {5: 0.0, 14: 0.0, 26: 0.0}
+2025-10-20 18:43:50.873 INFO: Processing datasets for head 'Default'
+2025-10-20 18:43:51.042 INFO: Combining 1 list datasets for head 'Default'
+2025-10-20 18:43:51.042 INFO: Head 'Default' training dataset size: 245
+2025-10-20 18:43:51.042 INFO: Computing average number of neighbors
+2025-10-20 18:43:51.239 INFO: Average number of neighbors: 19.66931216931217
+2025-10-20 18:43:51.240 INFO: During training the following quantities will be reported: energy, forces
+2025-10-20 18:43:51.240 INFO: ===========MODEL DETAILS===========
+2025-10-20 18:43:51.290 INFO: Building model
+2025-10-20 18:43:51.290 INFO: Message passing with 32 channels and max_L=0 (32x0e)
+2025-10-20 18:43:51.290 INFO: 2 layers, each with correlation order: 3 (body order: 4) and spherical harmonics up to: l=3
+2025-10-20 18:43:51.290 INFO: 8 radial and 5 basis functions
+2025-10-20 18:43:51.290 INFO: Radial cutoff: 4.0 A (total receptive field for each atom: 8.0 A)
+2025-10-20 18:43:51.290 INFO: Distance transform for radial basis functions: None
+2025-10-20 18:43:51.290 INFO: Hidden irreps: 32x0e
