@@ -1,0 +1,148 @@
+2025-10-20 23:55:32.269 INFO: ===========VERIFYING SETTINGS===========
+2025-10-20 23:55:32.270 INFO: MACE version: 0.3.14
+2025-10-20 23:55:32.271 DEBUG: Configuration: Namespace(config='config_new_model.yml', name='model02', seed=123, work_dir='.', log_dir='./logs', model_dir='.', checkpoints_dir='./checkpoints', results_dir='./results', downloads_dir='./downloads', device='cuda', default_dtype='float64', distributed=False, launcher='slurm', log_level='INFO', plot=True, plot_frequency=0, plot_interaction_e=False, error_table='PerAtomRMSE', model='MACE', r_max=4.0, radial_type='bessel', num_radial_basis=8, num_cutoff_basis=5, pair_repulsion=False, distance_transform='None', apply_cutoff=True, use_last_readout_only=False, use_embedding_readout=False, interaction='RealAgnosticResidualInteractionBlock', interaction_first='RealAgnosticResidualInteractionBlock', max_ell=3, correlation=3, use_reduced_cg=False, use_so3=False, use_agnostic_product=False, num_interactions=2, MLP_irreps='16x0e', radial_MLP='[64, 64, 64]', hidden_irreps=32x0e, edge_irreps=None, num_channels=32, max_L=0, gate='silu', scaling='rms_forces_scaling', avg_num_neighbors=1, compute_avg_num_neighbors=True, compute_stress=False, compute_forces=True, compute_polarizability=<function str2bool at 0x35f67d700>, compute_atomic_dipole=<function str2bool at 0x35f67d700>, train_file='train_model02.xyz', valid_file=None, valid_fraction=0.01, test_file='test_model02.xyz', test_dir=None, multi_processed_test=False, num_workers=0, pin_memory=True, atomic_numbers=None, mean=None, std=None, statistics_file=None, les_arguments=None, E0s=None, pseudolabel_replay=False, foundation_filter_elements=True, heads=None, multiheads_finetuning=True, foundation_head=None, weight_pt_head=1.0, real_pt_data_ratio_threshold=0.1, num_samples_pt=10000, force_mh_ft_lr=False, subselect_pt='random', filter_type_pt='none', allow_random_padding_pt=True, pt_train_file=None, pt_valid_file=None, foundation_model_elements=False, keep_isolated_atoms=False, energy_key='energy', forces_key='forces', virials_key='REF_virials', stress_key='REF_stress', dipole_key='dipole', polarizability_key='polarizability', head_key='head', charges_key='REF_charges', elec_temp_key='elec_temp', total_spin_key='total_spin', total_charge_key='total_charge', embedding_specs=None, skip_evaluate_heads='pt_head', loss='weighted', forces_weight=100.0, swa_forces_weight=100.0, energy_weight=1.0, swa_energy_weight=1000.0, virials_weight=1.0, swa_virials_weight=10.0, stress_weight=1.0, swa_stress_weight=10.0, dipole_weight=1.0, swa_dipole_weight=1.0, swa_polarizability_weight=1.0, polarizability_weight=1.0, config_type_weights='{"Default":1.0}', huber_delta=0.01, optimizer='adam', beta=0.9, batch_size=32, valid_batch_size=10, lr=0.01, swa_lr=0.001, weight_decay=5e-07, amsgrad=True, scheduler='ReduceLROnPlateau', lr_factor=0.8, scheduler_patience=50, lr_scheduler_gamma=0.9993, swa=False, start_swa=None, lbfgs=False, ema=False, ema_decay=0.99, max_num_epochs=100, patience=2048, foundation_model=None, foundation_model_readout=True, eval_interval=1, keep_checkpoints=False, save_all_checkpoints=False, restart_latest=False, save_cpu=False, clip_grad=10.0, dry_run=False, enable_cueq=False, only_cueq=False, enable_oeq=False, wandb=False, wandb_dir=None, wandb_project='', wandb_entity='', wandb_name='', wandb_log_hypers=['num_channels', 'max_L', 'correlation', 'lr', 'swa_lr', 'weight_decay', 'batch_size', 'max_num_epochs', 'start_swa', 'energy_weight', 'forces_weight'], key_specification=KeySpecification(info_keys={'energy': 'energy', 'stress': 'REF_stress', 'virials': 'REF_virials', 'dipole': 'dipole', 'head': 'head', 'elec_temp': 'elec_temp', 'total_charge': 'total_charge', 'polarizability': 'polarizability', 'total_spin': 'total_spin'}, arrays_keys={'forces': 'forces', 'charges': 'REF_charges'}))
+2025-10-20 23:55:53.795 INFO: ===========VERIFYING SETTINGS===========
+2025-10-20 23:55:53.796 INFO: MACE version: 0.3.14
+2025-10-20 23:55:53.797 DEBUG: Configuration: Namespace(config='config_new_model.yml', name='model02', seed=123, work_dir='.', log_dir='./logs', model_dir='.', checkpoints_dir='./checkpoints', results_dir='./results', downloads_dir='./downloads', device='cpu', default_dtype='float64', distributed=False, launcher='slurm', log_level='INFO', plot=True, plot_frequency=0, plot_interaction_e=False, error_table='PerAtomRMSE', model='MACE', r_max=4.0, radial_type='bessel', num_radial_basis=8, num_cutoff_basis=5, pair_repulsion=False, distance_transform='None', apply_cutoff=True, use_last_readout_only=False, use_embedding_readout=False, interaction='RealAgnosticResidualInteractionBlock', interaction_first='RealAgnosticResidualInteractionBlock', max_ell=3, correlation=3, use_reduced_cg=False, use_so3=False, use_agnostic_product=False, num_interactions=2, MLP_irreps='16x0e', radial_MLP='[64, 64, 64]', hidden_irreps=32x0e, edge_irreps=None, num_channels=32, max_L=0, gate='silu', scaling='rms_forces_scaling', avg_num_neighbors=1, compute_avg_num_neighbors=True, compute_stress=False, compute_forces=True, compute_polarizability=<function str2bool at 0x35f67d700>, compute_atomic_dipole=<function str2bool at 0x35f67d700>, train_file='train_model02.xyz', valid_file=None, valid_fraction=0.01, test_file='test_model02.xyz', test_dir=None, multi_processed_test=False, num_workers=0, pin_memory=True, atomic_numbers=None, mean=None, std=None, statistics_file=None, les_arguments=None, E0s=None, pseudolabel_replay=False, foundation_filter_elements=True, heads=None, multiheads_finetuning=True, foundation_head=None, weight_pt_head=1.0, real_pt_data_ratio_threshold=0.1, num_samples_pt=10000, force_mh_ft_lr=False, subselect_pt='random', filter_type_pt='none', allow_random_padding_pt=True, pt_train_file=None, pt_valid_file=None, foundation_model_elements=False, keep_isolated_atoms=False, energy_key='energy', forces_key='forces', virials_key='REF_virials', stress_key='REF_stress', dipole_key='dipole', polarizability_key='polarizability', head_key='head', charges_key='REF_charges', elec_temp_key='elec_temp', total_spin_key='total_spin', total_charge_key='total_charge', embedding_specs=None, skip_evaluate_heads='pt_head', loss='weighted', forces_weight=100.0, swa_forces_weight=100.0, energy_weight=1.0, swa_energy_weight=1000.0, virials_weight=1.0, swa_virials_weight=10.0, stress_weight=1.0, swa_stress_weight=10.0, dipole_weight=1.0, swa_dipole_weight=1.0, swa_polarizability_weight=1.0, polarizability_weight=1.0, config_type_weights='{"Default":1.0}', huber_delta=0.01, optimizer='adam', beta=0.9, batch_size=32, valid_batch_size=10, lr=0.01, swa_lr=0.001, weight_decay=5e-07, amsgrad=True, scheduler='ReduceLROnPlateau', lr_factor=0.8, scheduler_patience=50, lr_scheduler_gamma=0.9993, swa=False, start_swa=None, lbfgs=False, ema=False, ema_decay=0.99, max_num_epochs=100, patience=2048, foundation_model=None, foundation_model_readout=True, eval_interval=1, keep_checkpoints=False, save_all_checkpoints=False, restart_latest=False, save_cpu=False, clip_grad=10.0, dry_run=False, enable_cueq=False, only_cueq=False, enable_oeq=False, wandb=False, wandb_dir=None, wandb_project='', wandb_entity='', wandb_name='', wandb_log_hypers=['num_channels', 'max_L', 'correlation', 'lr', 'swa_lr', 'weight_decay', 'batch_size', 'max_num_epochs', 'start_swa', 'energy_weight', 'forces_weight'], key_specification=KeySpecification(info_keys={'energy': 'energy', 'stress': 'REF_stress', 'virials': 'REF_virials', 'dipole': 'dipole', 'head': 'head', 'elec_temp': 'elec_temp', 'total_charge': 'total_charge', 'polarizability': 'polarizability', 'total_spin': 'total_spin'}, arrays_keys={'forces': 'forces', 'charges': 'REF_charges'}))
+2025-10-20 23:55:53.797 INFO: Using CPU
+2025-10-20 23:55:53.798 DEBUG: sys.platform='darwin', git_executable='git'
+2025-10-20 23:55:53.799 DEBUG: Popen(['git', 'cat-file', '--batch-check'], cwd=/Users/Lab/Documents/GitHub/research_files, stdin=<valid stream>, shell=False, universal_newlines=False)
+2025-10-20 23:55:53.836 DEBUG: Current Git commit: 0c792f6e3ec0d626e1f7a92a91497110c628e80d
+2025-10-20 23:55:53.837 INFO: ===========LOADING INPUT DATA===========
+2025-10-20 23:55:53.838 INFO: Using heads: ['Default']
+2025-10-20 23:55:53.838 INFO: Using the key specifications to parse data:
+2025-10-20 23:55:53.838 INFO: Default: KeySpecification(info_keys={'energy': 'energy', 'stress': 'REF_stress', 'virials': 'REF_virials', 'dipole': 'dipole', 'head': 'head', 'elec_temp': 'elec_temp', 'total_charge': 'total_charge', 'polarizability': 'polarizability', 'total_spin': 'total_spin'}, arrays_keys={'forces': 'forces', 'charges': 'REF_charges'})
+2025-10-20 23:55:53.839 INFO: =============    Processing head Default     ===========
+2025-10-20 23:55:53.839 DEBUG: Loading training file: train_model02.xyz
+2025-10-20 23:57:09.936 INFO: ===========VERIFYING SETTINGS===========
+2025-10-20 23:57:09.937 INFO: MACE version: 0.3.14
+2025-10-20 23:57:09.938 DEBUG: Configuration: Namespace(config='config_new_model.yml', name='model02', seed=123, work_dir='.', log_dir='./logs', model_dir='.', checkpoints_dir='./checkpoints', results_dir='./results', downloads_dir='./downloads', device='cpu', default_dtype='float64', distributed=False, launcher='slurm', log_level='INFO', plot=True, plot_frequency=0, plot_interaction_e=False, error_table='PerAtomRMSE', model='MACE', r_max=4.0, radial_type='bessel', num_radial_basis=8, num_cutoff_basis=5, pair_repulsion=False, distance_transform='None', apply_cutoff=True, use_last_readout_only=False, use_embedding_readout=False, interaction='RealAgnosticResidualInteractionBlock', interaction_first='RealAgnosticResidualInteractionBlock', max_ell=3, correlation=3, use_reduced_cg=False, use_so3=False, use_agnostic_product=False, num_interactions=2, MLP_irreps='16x0e', radial_MLP='[64, 64, 64]', hidden_irreps=32x0e, edge_irreps=None, num_channels=32, max_L=0, gate='silu', scaling='rms_forces_scaling', avg_num_neighbors=1, compute_avg_num_neighbors=True, compute_stress=False, compute_forces=True, compute_polarizability=<function str2bool at 0x35f67d700>, compute_atomic_dipole=<function str2bool at 0x35f67d700>, train_file='train_01.xyz', valid_file=None, valid_fraction=0.01, test_file='test_01.xyz', test_dir=None, multi_processed_test=False, num_workers=0, pin_memory=True, atomic_numbers=None, mean=None, std=None, statistics_file=None, les_arguments=None, E0s=None, pseudolabel_replay=False, foundation_filter_elements=True, heads=None, multiheads_finetuning=True, foundation_head=None, weight_pt_head=1.0, real_pt_data_ratio_threshold=0.1, num_samples_pt=10000, force_mh_ft_lr=False, subselect_pt='random', filter_type_pt='none', allow_random_padding_pt=True, pt_train_file=None, pt_valid_file=None, foundation_model_elements=False, keep_isolated_atoms=False, energy_key='energy', forces_key='forces', virials_key='REF_virials', stress_key='REF_stress', dipole_key='dipole', polarizability_key='polarizability', head_key='head', charges_key='REF_charges', elec_temp_key='elec_temp', total_spin_key='total_spin', total_charge_key='total_charge', embedding_specs=None, skip_evaluate_heads='pt_head', loss='weighted', forces_weight=100.0, swa_forces_weight=100.0, energy_weight=1.0, swa_energy_weight=1000.0, virials_weight=1.0, swa_virials_weight=10.0, stress_weight=1.0, swa_stress_weight=10.0, dipole_weight=1.0, swa_dipole_weight=1.0, swa_polarizability_weight=1.0, polarizability_weight=1.0, config_type_weights='{"Default":1.0}', huber_delta=0.01, optimizer='adam', beta=0.9, batch_size=32, valid_batch_size=10, lr=0.01, swa_lr=0.001, weight_decay=5e-07, amsgrad=True, scheduler='ReduceLROnPlateau', lr_factor=0.8, scheduler_patience=50, lr_scheduler_gamma=0.9993, swa=False, start_swa=None, lbfgs=False, ema=False, ema_decay=0.99, max_num_epochs=100, patience=2048, foundation_model=None, foundation_model_readout=True, eval_interval=1, keep_checkpoints=False, save_all_checkpoints=False, restart_latest=False, save_cpu=False, clip_grad=10.0, dry_run=False, enable_cueq=False, only_cueq=False, enable_oeq=False, wandb=False, wandb_dir=None, wandb_project='', wandb_entity='', wandb_name='', wandb_log_hypers=['num_channels', 'max_L', 'correlation', 'lr', 'swa_lr', 'weight_decay', 'batch_size', 'max_num_epochs', 'start_swa', 'energy_weight', 'forces_weight'], key_specification=KeySpecification(info_keys={'energy': 'energy', 'stress': 'REF_stress', 'virials': 'REF_virials', 'dipole': 'dipole', 'head': 'head', 'elec_temp': 'elec_temp', 'total_charge': 'total_charge', 'polarizability': 'polarizability', 'total_spin': 'total_spin'}, arrays_keys={'forces': 'forces', 'charges': 'REF_charges'}))
+2025-10-20 23:57:09.938 INFO: Using CPU
+2025-10-20 23:57:09.939 DEBUG: sys.platform='darwin', git_executable='git'
+2025-10-20 23:57:09.940 DEBUG: Popen(['git', 'cat-file', '--batch-check'], cwd=/Users/Lab/Documents/GitHub/research_files, stdin=<valid stream>, shell=False, universal_newlines=False)
+2025-10-20 23:57:09.971 DEBUG: Current Git commit: 0c792f6e3ec0d626e1f7a92a91497110c628e80d
+2025-10-20 23:57:09.971 INFO: ===========LOADING INPUT DATA===========
+2025-10-20 23:57:09.972 INFO: Using heads: ['Default']
+2025-10-20 23:57:09.972 INFO: Using the key specifications to parse data:
+2025-10-20 23:57:09.973 INFO: Default: KeySpecification(info_keys={'energy': 'energy', 'stress': 'REF_stress', 'virials': 'REF_virials', 'dipole': 'dipole', 'head': 'head', 'elec_temp': 'elec_temp', 'total_charge': 'total_charge', 'polarizability': 'polarizability', 'total_spin': 'total_spin'}, arrays_keys={'forces': 'forces', 'charges': 'REF_charges'})
+2025-10-20 23:57:09.973 INFO: =============    Processing head Default     ===========
+2025-10-20 23:57:09.974 DEBUG: Loading training file: train_01.xyz
+2025-10-20 23:57:10.062 WARNING: Since ASE version 3.23.0b1, using energy_key 'energy' is no longer safe when communicating between MACE and ASE. We recommend using a different key, rewriting 'energy' to 'REF_energy'. You need to use --energy_key='REF_energy' to specify the chosen key name.
+2025-10-20 23:57:10.100 WARNING: Since ASE version 3.23.0b1, using forces_key 'forces' is no longer safe when communicating between MACE and ASE. We recommend using a different key, rewriting 'forces' to 'REF_forces'. You need to use --forces_key='REF_forces' to specify the chosen key name.
+2025-10-20 23:57:10.135 WARNING: Configuration '0' is marked as 'IsolatedAtom' but does not contain an energy. Zero energy will be used.
+2025-10-20 23:57:10.136 WARNING: Configuration '1' is marked as 'IsolatedAtom' but does not contain an energy. Zero energy will be used.
+2025-10-20 23:57:10.136 WARNING: Configuration '2' is marked as 'IsolatedAtom' but does not contain an energy. Zero energy will be used.
+2025-10-20 23:57:10.137 INFO: Using isolated atom energies from training file
+2025-10-20 23:57:10.149 INFO: Training set 1/1 [energy: 517, stress: 0, virials: 0, dipole components: 0, head: 517, elec_temp: 0, total_charge: 0, polarizability: 0, total_spin: 0, forces: 517, charges: 0]
+2025-10-20 23:57:10.151 INFO: Total Training set [energy: 517, stress: 0, virials: 0, dipole components: 0, head: 517, elec_temp: 0, total_charge: 0, polarizability: 0, total_spin: 0, forces: 517, charges: 0]
+2025-10-20 23:57:10.152 INFO: No validation set provided, splitting training data instead.
+2025-10-20 23:57:10.153 INFO: Using random 1% of training set for validation with following indices: [5, 302, 291, 153, 461]
+2025-10-20 23:57:10.155 INFO: Random Split Training set [energy: 512, stress: 0, virials: 0, dipole components: 0, head: 512, elec_temp: 0, total_charge: 0, polarizability: 0, total_spin: 0, forces: 512, charges: 0]
+2025-10-20 23:57:10.155 INFO: Random Split Validation set [energy: 5, stress: 0, virials: 0, dipole components: 0, head: 5, elec_temp: 0, total_charge: 0, polarizability: 0, total_spin: 0, forces: 5, charges: 0]
+2025-10-20 23:57:10.186 WARNING: Since ASE version 3.23.0b1, using energy_key 'energy' is no longer safe when communicating between MACE and ASE. We recommend using a different key, rewriting 'energy' to 'REF_energy'. You need to use --energy_key='REF_energy' to specify the chosen key name.
+2025-10-20 23:57:10.197 WARNING: Since ASE version 3.23.0b1, using forces_key 'forces' is no longer safe when communicating between MACE and ASE. We recommend using a different key, rewriting 'forces' to 'REF_forces'. You need to use --forces_key='REF_forces' to specify the chosen key name.
+2025-10-20 23:57:10.211 INFO: Test set 1/1 [energy: 133, stress: 0, virials: 0, dipole components: 0, head: 133, elec_temp: 0, total_charge: 0, polarizability: 0, total_spin: 0, forces: 133, charges: 0]
+2025-10-20 23:57:10.212 INFO: Total Test set [energy: 133, stress: 0, virials: 0, dipole components: 0, head: 133, elec_temp: 0, total_charge: 0, polarizability: 0, total_spin: 0, forces: 133, charges: 0]
+2025-10-20 23:57:10.212 DEBUG: Element 26 found in 1 file. Using E0: 0.000000 eV
+2025-10-20 23:57:10.212 DEBUG: Element 14 found in 1 file. Using E0: 0.000000 eV
+2025-10-20 23:57:10.212 DEBUG: Element 5 found in 1 file. Using E0: 0.000000 eV
+2025-10-20 23:57:10.212 INFO: Total number of configurations: train=512, valid=5, tests=[Fe13Si1B1_Default: 133],
+2025-10-20 23:57:10.212 WARNING: Validation batch size (10) is larger than the number of validation data (5)
+2025-10-20 23:57:10.214 INFO: Atomic Numbers used: [5, 14, 26]
+2025-10-20 23:57:10.214 INFO: Atomic Energies used (z: eV) for head Default: {5: 0.0, 14: 0.0, 26: 0.0}
+2025-10-20 23:57:10.214 INFO: Processing datasets for head 'Default'
+2025-10-20 23:57:10.453 DEBUG: Successfully loaded dataset from ASE files: ['train_01.xyz']
+2025-10-20 23:57:10.453 INFO: Combining 1 list datasets for head 'Default'
+2025-10-20 23:57:10.459 INFO: Head 'Default' training dataset size: 512
+2025-10-20 23:57:10.462 INFO: Computing average number of neighbors
+2025-10-20 23:57:10.547 INFO: Average number of neighbors: 17.63285789751717
+2025-10-20 23:57:10.547 INFO: During training the following quantities will be reported: energy, forces
+2025-10-20 23:57:10.548 INFO: ===========MODEL DETAILS===========
+2025-10-20 23:57:10.610 INFO: Building model
+2025-10-20 23:57:10.610 INFO: Message passing with 32 channels and max_L=0 (32x0e)
+2025-10-20 23:57:10.611 INFO: 2 layers, each with correlation order: 3 (body order: 4) and spherical harmonics up to: l=3
+2025-10-20 23:57:10.611 INFO: 8 radial and 5 basis functions
+2025-10-20 23:57:10.611 INFO: Radial cutoff: 4.0 A (total receptive field for each atom: 8.0 A)
+2025-10-20 23:57:10.612 INFO: Distance transform for radial basis functions: None
+2025-10-20 23:57:10.612 INFO: Hidden irreps: 32x0e
+2025-10-20 23:57:11.293 DEBUG: ScaleShiftMACE(
+  (node_embedding): LinearNodeEmbeddingBlock(
+    (linear): Linear(3x0e -> 32x0e | 96 weights)
+  )
+  (radial_embedding): RadialEmbeddingBlock(
+    (bessel_fn): BesselBasis(r_max=4.0, num_basis=8, trainable=False)
+    (cutoff_fn): PolynomialCutoff(p=5, r_max=4.0)
+  )
+  (spherical_harmonics): SphericalHarmonics()
+  (atomic_energies_fn): AtomicEnergiesBlock(energies=[[0.0000, 0.0000, 0.0000]])
+  (interactions): ModuleList(
+    (0): RealAgnosticInteractionBlock(
+      (linear_up): Linear(32x0e -> 32x0e | 1024 weights)
+      (conv_tp): TensorProduct(32x0e x 1x0e+1x1o+1x2e+1x3o -> 32x0e+32x1o+32x2e+32x3o | 128 paths | 128 weights)
+      (conv_tp_weights): FullyConnectedNet[8, 64, 64, 64, 128]
+      (linear): Linear(32x0e+32x1o+32x2e+32x3o -> 32x0e+32x1o+32x2e+32x3o | 4096 weights)
+      (skip_tp): FullyConnectedTensorProduct(32x0e+32x1o+32x2e+32x3o x 3x0e -> 32x0e+32x1o+32x2e+32x3o | 12288 paths | 12288 weights)
+      (reshape): reshape_irreps()
+    )
+    (1): RealAgnosticResidualInteractionBlock(
+      (linear_up): Linear(32x0e -> 32x0e | 1024 weights)
+      (conv_tp): TensorProduct(32x0e x 1x0e+1x1o+1x2e+1x3o -> 32x0e+32x1o+32x2e+32x3o | 128 paths | 128 weights)
+      (conv_tp_weights): FullyConnectedNet[8, 64, 64, 64, 128]
+      (linear): Linear(32x0e+32x1o+32x2e+32x3o -> 32x0e+32x1o+32x2e+32x3o | 4096 weights)
+      (skip_tp): FullyConnectedTensorProduct(32x0e x 3x0e -> 32x0e | 3072 paths | 3072 weights)
+      (reshape): reshape_irreps()
+    )
+  )
+  (products): ModuleList(
+    (0-1): 2 x EquivariantProductBasisBlock(
+      (symmetric_contractions): SymmetricContraction(
+        (contractions): ModuleList(
+          (0): Contraction(
+            (contractions_weighting): ModuleList(
+              (0-1): 2 x GraphModule()
+            )
+            (contractions_features): ModuleList(
+              (0-1): 2 x GraphModule()
+            )
+            (weights): ParameterList(
+                (0): Parameter containing: [torch.float64 of size 3x4x32]
+                (1): Parameter containing: [torch.float64 of size 3x1x32]
+            )
+            (graph_opt_main): GraphModule()
+          )
+        )
+      )
+      (linear): Linear(32x0e -> 32x0e | 1024 weights)
+    )
+  )
+  (readouts): ModuleList(
+    (0): LinearReadoutBlock(
+      (linear): Linear(32x0e -> 1x0e | 32 weights)
+    )
+    (1): NonLinearReadoutBlock(
+      (linear_1): Linear(32x0e -> 16x0e | 512 weights)
+      (non_linearity): Activation [x] (16x0e -> 16x0e)
+      (linear_2): Linear(16x0e -> 1x0e | 16 weights)
+    )
+  )
+  (scale_shift): ScaleShiftBlock(scale=1.7210, shift=0.0000)
+)
+2025-10-20 23:57:11.294 INFO: Total number of parameters: 67472
+2025-10-20 23:57:11.295 INFO: 
+2025-10-20 23:57:11.295 INFO: ===========OPTIMIZER INFORMATION===========
+2025-10-20 23:57:11.295 INFO: Using ADAM as parameter optimizer
+2025-10-20 23:57:11.296 INFO: Batch size: 32
+2025-10-20 23:57:11.296 INFO: Number of gradient updates: 1600
+2025-10-20 23:57:11.296 INFO: Learning rate: 0.01, weight decay: 5e-07
+2025-10-20 23:57:11.296 INFO: WeightedEnergyForcesLoss(energy_weight=1.000, forces_weight=100.000)
+2025-10-20 23:57:11.297 INFO: Using gradient clipping with tolerance=10.000
+2025-10-20 23:57:11.297 INFO: 
+2025-10-20 23:57:11.298 INFO: ===========TRAINING===========
+2025-10-20 23:57:11.298 INFO: Started training, reporting errors on validation set
+2025-10-20 23:57:11.298 INFO: Loss metrics on validation set
+2025-10-20 23:57:11.369 INFO: Initial: head: Default, loss=37.51196496, RMSE_E_per_atom= 5166.12 meV, RMSE_F= 1268.35 meV / A
+2025-10-20 23:57:18.521 INFO: Epoch 0: head: Default, loss=30.90256944, RMSE_E_per_atom= 4945.63 meV, RMSE_F= 1140.41 meV / A
+2025-10-20 23:57:18.522 DEBUG: Saving checkpoint: ./checkpoints/model02_run-123_epoch-0.pt
+2025-10-20 23:57:25.398 INFO: Epoch 1: head: Default, loss=15.53237340, RMSE_E_per_atom= 4406.56 meV, RMSE_F=  763.18 meV / A
+2025-10-20 23:57:25.399 DEBUG: Deleting old checkpoint file: ./checkpoints/model02_run-123_epoch-0.pt
+2025-10-20 23:57:25.399 DEBUG: Saving checkpoint: ./checkpoints/model02_run-123_epoch-1.pt
