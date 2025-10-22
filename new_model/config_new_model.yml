@@ -1,0 +1,14 @@
+model: MACE
+num_channels: 32
+max_L: 0
+r_max: 4.0
+name: model_01_100epochs
+train_file: train_01.xyz
+valid_fraction: 0.01
+test_file: test_01.xyz
+energy_key: energy
+forces_key: forces
+batch_size: 32
+max_num_epochs: 100
+device: cuda
+seed: 123
