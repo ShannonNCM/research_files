@@ -1,0 +1,10 @@
+# Logs
+*.log
+new_model/logs/
+# Model outputs / checkpoints
+checkpoints/
+outputs/
+# Python / Jupyter artifacts
+__pycache__/
+.ipynb_checkpoints/
+*.pyc
