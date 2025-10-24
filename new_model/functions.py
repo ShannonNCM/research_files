@@ -43,7 +43,7 @@ def plot_loss(dataframes, x, y, model_name):
         plt.ylabel(y)
         plt.legend()
         plt.autoscale()
-        last_epoch = int(df[x].max())
+        #last_epoch = int(df[x].max())
         filename = f'img_res/{model_name}_{label}_loss.pdf'
         plt.savefig(filename)
         plt.show()
