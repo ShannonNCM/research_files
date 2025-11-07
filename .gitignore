@@ -8,3 +8,5 @@ outputs/
 __pycache__/
 .ipynb_checkpoints/
 *.pyc
+#adding the DS_Store file to ignore
+.DS_Store
