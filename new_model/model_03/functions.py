@@ -7,8 +7,40 @@ import yaml
 import json
 import matplotlib.pyplot as plt
 import pandas as pd
-import os#
+import os
 import sys
+from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
+
+#function for extracting information from the evaluation of the model
+def eval_read(model_name, file):
+    file = read(f'test_res/{model_name}_{file}.xyz', index=':')
+    
+    data = []
+    for a in file:
+        n_atoms = len(a)
+        ref_e = a.info['REF_energy']
+        mace_e = a.info['MACE_energy']
+        ref_e_meV = ref_e*1000
+        mace_e_meV = mace_e*1000
+        ref_f = a.arrays['REF_forces']
+        mace_f = a.arrays['MACE_forces']
+        ref_e_meV_atom = ref_e_meV / n_atoms
+        mace_e_meV_atom = mace_e_meV / n_atoms
+
+        data.append({'n_atoms':n_atoms, 'REF_energy':ref_e, 'MACE_energy':mace_e, 'ref_energy_meV':ref_e_meV, 'mace_energy_meV':mace_e_meV, 'REF_e/atom_meV':ref_e_meV_atom, 'MACE_e/atom_meV':mace_e_meV_atom, 'REF_forces':ref_f, 'MACE_forces':mace_f})
+
+    df = pd.DataFrame(data)
+    return df
+
+#function to calculate the errors
+def errors(df):
+    rmse = np.sqrt(mean_squared_error(df['REF_e/atom_meV'],df['MACE_e/atom_meV']))
+    mae = mean_absolute_error(df['REF_e/atom_meV'],df['MACE_e/atom_meV'])
+    r2 = r2_score(df['REF_e/atom_meV'],df['MACE_e/atom_meV'])
+    return rmse, mae, r2
+
+
+#### PLOTTING FUNCTIONS 
 
 #function for plotting the mean absolute error for forces and energy
 def plot_mae(dataframe, x, y):
@@ -53,8 +85,8 @@ def plot_loss(dataframes, x, y, model_name):
 def plot_energy_comparison(df,x,y):
     plt.scatter(df[x],df[y])
     plt.plot([df[x].min(), df[x].max()], [df[y].min(), df[y].max()], 'r--')
-    plt.xlabel('ref energy (eV)')
-    plt.ylabel('predicted (eV)')
+    plt.xlabel('ref energy per atom (meV)')
+    plt.ylabel('predicted energy per atom (meV)')
     plt.xlim(df[x].min(), df[x].max())
     plt.ylim(df[y].min(), df[y].max())
     plt.autoscale()
