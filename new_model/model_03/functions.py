@@ -9,7 +9,67 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import os
 import sys
+import re
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
+
+#function to set the names of the tags in the xyz file
+def file_format(input_file, output_file):
+    with open(input_file, "r") as f:
+        lines = f.readlines()
+
+    new_lines = []
+    i=0
+
+    while i < len(lines):
+        n_atom_line = lines[i]
+        new_lines.append(n_atom_line)
+        i += 1
+
+        try:
+            n_atoms = int(n_atom_line.strip())
+        except ValueError:
+            continue
+
+        header = lines[i]
+
+        if n_atoms == 1:
+            header = re.sub(r"config_type=\S+", "config_type=IsolatedAtom", header)
+
+        if "energy" in header:
+            header = header.replace("energy=", "REF_energy=")
+        if "Properties=" in header and "forces" in header:
+            header = header.replace("forces", "REF_forces")
+    
+        new_lines.append(header)
+        i += 1
+
+        for _ in range(n_atoms):
+            new_lines.append(lines[i])
+            i += 1    
+
+    # Write the fixed file
+    with open(output_file, "w") as f:
+        f.writelines(new_lines)
+
+
+#function to read xyz file and extract information
+def file_read(file_name):
+    file = read(file_name, index=':')
+    
+    data = []
+    for a in file:
+        n_atoms = len(a)
+        ref_e = a.info['REF_energy']
+        #ref_e_atom = ref_e / n_atoms
+        #ref_e_meV = ref_e*1000
+        #ref_e_meV_atom = ref_e_meV / n_atoms
+
+        data.append({'n_atoms':n_atoms, 'REF_energy':ref_e#, 'REF_e/atom_eV':ref_e_atom, 'ref_energy_meV':ref_e_meV, 'REF_e/atom_meV':ref_e_meV_atom
+                     })
+
+    df = pd.DataFrame(data)
+    return df
+
 
 #function for extracting information from the evaluation of the model
 def eval_read(model_name, file):
@@ -33,11 +93,12 @@ def eval_read(model_name, file):
     return df
 
 #function to calculate the errors
-def errors(df):
+def errors(df,file):
     rmse = np.sqrt(mean_squared_error(df['REF_e/atom_meV'],df['MACE_e/atom_meV']))
     mae = mean_absolute_error(df['REF_e/atom_meV'],df['MACE_e/atom_meV'])
     r2 = r2_score(df['REF_e/atom_meV'],df['MACE_e/atom_meV'])
-    return rmse, mae, r2
+    results = pd.DataFrame({'error':file, 'rmse':[rmse], 'mae':[mae], 'r2':r2})
+    return results
 
 
 #### PLOTTING FUNCTIONS 
