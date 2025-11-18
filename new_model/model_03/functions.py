@@ -146,8 +146,8 @@ def plot_loss(dataframes, x, y, model_name):
 def plot_energy_comparison(df,x,y):
     plt.scatter(df[x],df[y])
     plt.plot([df[x].min(), df[x].max()], [df[y].min(), df[y].max()], 'r--')
-    plt.xlabel('ref energy per atom (meV)')
-    plt.ylabel('predicted energy per atom (meV)')
+    plt.xlabel(f'{x}')
+    plt.ylabel(f'{y}')
     plt.xlim(df[x].min(), df[x].max())
     plt.ylim(df[y].min(), df[y].max())
     plt.autoscale()
