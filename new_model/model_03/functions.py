@@ -92,6 +92,15 @@ def eval_read(model_name, file):
     df = pd.DataFrame(data)
     return df
 
+
+#function to extract the forces
+def forces(df):
+    ref_f = np.concatenate(df['REF_forces'].values).flatten()
+    mace_f = np.concatenate(df['MACE_forces'].values).flatten()
+    new_df = pd.DataFrame({'REF_force':ref_f, 'MACE_force':mace_f})
+    return new_df
+
+
 #function to calculate the errors
 def errors(df,file):
     rmse = np.sqrt(mean_squared_error(df['REF_e/atom_meV'],df['MACE_e/atom_meV']))
