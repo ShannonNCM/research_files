@@ -101,54 +101,55 @@ def errors(df,file):
     return results
 
 
+#### ________________________________
 #### PLOTTING FUNCTIONS 
+#### ________________________________
 
 #function for plotting the mean absolute error for forces and energy
 def plot_mae(dataframe, x, y):
+    colors = plt.cm.tab10.colors
+    n=len(y)
+    #establezco el layout de la figura
+    fig, axes = plt.subplots(1,2, figsize=(4*n, 4), layout='constrained')
     for i, col in enumerate(y):
-        colors=plt.cm.tab10.colors
-        plt.scatter(dataframe[x], dataframe[col], color=colors[i %len(colors)], label=f'{col} (eV)')
-        plt.xlabel(x)
-        plt.ylabel('mae')
-        plt.legend()
-        plt.autoscale
-        plt.show()
+        axs = axes[i]
+        axs.scatter(dataframe[x], dataframe[col], color=colors[i %len(colors)], label=f'{col} (eV)')
+        axs.set_xlabel(x)
+        axs.set_ylabel('mae')
+        axs.legend()
 
 
 #function to plot the training and validation errors as funcionts of epochs
 def plot_loss(dataframes, x, y, model_name):
-
     colors=plt.cm.tab10.colors
+    n=len(y)
 
-    #plotting the combined graph
+    fig, axes=plt.subplots(1,2, figsize=(3*n,6), layout='constrained')
+    fig.suptitle('Training and validation loss')
     for i, (df, label) in enumerate(dataframes):
-        plt.scatter(df[x], df[y], color=colors[i % len(colors)], label=label)
-        plt.xlabel(x)
-        plt.ylabel(y)
-        plt.legend()
-        plt.autoscale()
-    plt.show()
-    
-    #plotting one for each dataframe
-    for i, (df, label) in enumerate(dataframes):
-        plt.scatter(df[x], df[y], color=colors[i % len(colors)], label=label)
-        plt.xlabel(x)
-        plt.ylabel(y)
-        plt.legend()
-        plt.autoscale()
-        #last_epoch = int(df[x].max())
-        filename = f'img_res/{model_name}_{label}_loss.pdf'
-        plt.savefig(filename)
-        plt.show()
+        axs = axes[i]
+        axs.scatter(df[x], df[y], color=colors[i % len(colors)], label=label)
+        axs.set_xlabel(x)
+        axs.set_ylabel(y)
+        axs.legend()
+        #si lo voy a guardar como pdfs separados
+        #filename = f'img_res/{model_name}_{label}_loss.pdf'
+        #plt.savefig(filename)
+
+    filename = f'img_res/{model_name}_loss.pdf'
+    plt.savefig(filename)
 
 
 #function for plotting the reference vs predicted energies
-def plot_energy_comparison(df,x,y):
-    plt.scatter(df[x],df[y])
-    plt.plot([df[x].min(), df[x].max()], [df[y].min(), df[y].max()], 'r--')
-    plt.xlabel(f'{x}')
-    plt.ylabel(f'{y}')
-    plt.xlim(df[x].min(), df[x].max())
-    plt.ylim(df[y].min(), df[y].max())
-    plt.autoscale()
-    plt.show()    
+def plot_comparison(dfs, x_cols, y_cols):
+    row = len(dfs)
+    cols = len(x_cols)
+    fig, axes=plt.subplots(row, cols, figsize=(5*row, 5*cols), 
+                           layout='constrained')
+    for i, df in enumerate(dfs):
+        for j, (x,y) in enumerate(zip(x_cols, y_cols)):
+            axs = axes[i][j]
+            axs.scatter(df[x], df[y])
+            axs.plot([df[x].min(), df[x].max()], [df[y].min(), df[y].max()], 'r--')
+            axs.set_xlabel(f'{x}')
+            axs.set_ylabel(f'{y}')
