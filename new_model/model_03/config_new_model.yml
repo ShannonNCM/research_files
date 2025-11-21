@@ -2,16 +2,16 @@ model: ScaleShiftMACE
 num_channels: 32
 max_L: 0
 r_max: 4.0
-name: model_scaleshift_lr0.001_30epochs_10batch
+name: model_scaleshift_lr0.0005_35epochs_10batch
 train_file: train_01.xyz
 valid_fraction: 0.01
 test_file: test_01.xyz
 energy_key: REF_energy
 forces_key: REF_forces
 batch_size: 10
-max_num_epochs: 30
+max_num_epochs: 35
 optimizer: adam
-lr: 0.001
+lr: 0.0005
 device: cpu
 seed: 123
 config_type_weights:
