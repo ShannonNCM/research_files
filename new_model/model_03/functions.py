@@ -102,10 +102,10 @@ def forces(df):
 
 
 #function to calculate the errors
-def errors(df,file):
-    rmse = np.sqrt(mean_squared_error(df['REF_e/atom_meV'],df['MACE_e/atom_meV']))
-    mae = mean_absolute_error(df['REF_e/atom_meV'],df['MACE_e/atom_meV'])
-    r2 = r2_score(df['REF_e/atom_meV'],df['MACE_e/atom_meV'])
+def errors(df,file, ref, pred):
+    rmse = np.sqrt(mean_squared_error(df[ref],df[pred]))
+    mae = mean_absolute_error(df[ref],df[pred])
+    r2 = r2_score(df[ref],df[pred])
     results = pd.DataFrame({'error':file, 'rmse':[rmse], 'mae':[mae], 'r2':r2})
     return results
 
@@ -153,8 +153,14 @@ def plot_loss(dataframes, x, y, model_name):
 def plot_comparison(dfs, x_cols, y_cols):
     row = len(dfs)
     cols = len(x_cols)
-    fig, axes=plt.subplots(row, cols, figsize=(5*row, 5*cols), 
+
+    fig, axes=plt.subplots(row, cols, figsize=(5*cols, 5*row), 
                            layout='constrained')
+    if row == 1:
+        axes = np.array([axes])
+    if cols == 1:
+        axes = axes.reshape(row,1)
+    
     for i, df in enumerate(dfs):
         for j, (x,y) in enumerate(zip(x_cols, y_cols)):
             axs = axes[i][j]
