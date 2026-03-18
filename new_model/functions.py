@@ -150,7 +150,7 @@ def plot_loss(dataframes, x, y, model_name, name):
 
 
 #function for plotting the reference vs predicted energies
-def plot_comparison(dfs, x_cols, y_cols, titles):
+def plot_comparison(dfs, x_cols, y_cols, titles, label, model_name, name):
     row = len(dfs)
     cols = len(x_cols)
 
@@ -163,7 +163,7 @@ def plot_comparison(dfs, x_cols, y_cols, titles):
     
     for i, df in enumerate(dfs):
         title = titles[i] if titles else f'df_{i}'
-        
+
         for j, (x,y) in enumerate(zip(x_cols, y_cols)):
             axs = axes[i][j]
             axs.scatter(df[x], df[y])
@@ -171,3 +171,6 @@ def plot_comparison(dfs, x_cols, y_cols, titles):
             axs.set_xlabel(f'{x}')
             axs.set_ylabel(f'{y}')
             axs.set_title(f'{title}')
+
+    fig_name = f'model_{name}/img_res/{model_name}_{label}.pdf'
+    plt.savefig(fig_name)
