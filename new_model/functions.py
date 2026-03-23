@@ -10,7 +10,27 @@ import pandas as pd
 import os
 import sys
 import re
+import random
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
+
+#function for splitting data
+def split(type, output_file, name):
+    db = read(output_file, ':')
+    if type == 'rnd':
+        isolated_atoms = [atoms for atoms in db if len(atoms)==1]
+        structures = [atoms for atoms in db if len(atoms)>1]
+        random.seed(42)
+        random.shuffle(structures)
+        split1 = int(0.8*len(structures))
+        train_rnd = isolated_atoms+structures[:split1]
+        test_rnd = structures[split1:]
+        write(f'model_{name}/train_rnd.xyz', train_rnd)
+        write(f'model_{name}/test_rnd.xyz', test_rnd)
+    else:
+        n = len(db)
+        split = int(0.8*n)
+        write(f'model_{name}/train_01.xyz', db[:split])
+        write(f'model_{name}/test_01.xyz', db[split:])
 
 #function to set the names of the tags in the xyz file
 def file_format(input_file, output_file):
