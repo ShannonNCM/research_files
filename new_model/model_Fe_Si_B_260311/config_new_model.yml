@@ -2,7 +2,7 @@ model: ScaleShiftMACE
 num_channels: 32
 max_L: 0
 r_max: 4.0
-name: rnd_model_scaleshift_lr0.001_35epochs_10batch
+name: rnd_model_scaleshift_lr0.001_45epochs_10batch
 model_dir: model_Fe_Si_B_260311
 log_dir: model_Fe_Si_B_260311/log
 checkpoints_dir: model_Fe_Si_B_260311/checkpoints
@@ -13,9 +13,9 @@ test_file: model_Fe_Si_B_260311/test_rnd.xyz
 energy_key: REF_energy
 forces_key: REF_forces
 batch_size: 10
-max_num_epochs: 35
+max_num_epochs: 45
 optimizer: adam
-lr: 0.0005
+lr: 0.001
 device: cpu
 seed: 123
 config_type_weights:
