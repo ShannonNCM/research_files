@@ -50,7 +50,7 @@ def split(type, output_file, name):
         test_rnd = []
         for bin_id, atoms_list in bin_dict.items():
             n = len(atoms_list)
-            split = int(0.8 * n)
+            split = max(1,int(0.8 * n))
             
             random.shuffle(atoms_list)
             
