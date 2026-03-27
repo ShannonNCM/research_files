@@ -11,6 +11,7 @@ import os
 import sys
 import re
 import random
+from collections import defaultdict
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 
 #function for splitting data
@@ -27,11 +28,37 @@ def split(type, output_file, name):
         write(f'model_{name}/train_rnd.xyz', train_rnd)
         write(f'model_{name}/test_rnd.xyz', test_rnd)
     elif type == 'rnd_e':
+        data = []
         for a in structures:
             num_atoms = len(a)
             toten = a.info['REF_energy']
             e_per_atom = toten/num_atoms
+            data.append({#'n_atoms':num_atoms, 'REF_energy':toten, 
+                        'energy/atom':e_per_atom})
+        data1 = pd.DataFrame(data)
+        #determinamos los minimos y maximos para los bins
+        counts, bins = np.histogram(data1)
 
+        bin_indx = np.digitize(data1['energy/atom'], bins)
+        bin_dict = defaultdict(list)
+        for idx, bin_id in enumerate(bin_indx):
+            bin_dict[bin_id].append(structures[idx])
+
+        random.seed(42)
+
+        train_rnd = []
+        test_rnd = []
+        for bin_id, atoms_list in bin_dict.items():
+            n = len(atoms_list)
+            split = int(0.8 * n)
+            
+            random.shuffle(atoms_list)
+            
+            train_rnd.extend(atoms_list[:split])
+            test_rnd.extend(atoms_list[split:])
+        train_rnd = isolated_atoms + train_rnd
+        write(f'model_{name}/train_rnd_e.xyz', train_rnd)
+        write(f'model_{name}/test_rnd_e.xyz', test_rnd)
     else:
         n = len(db)
         split = int(0.8*n)
