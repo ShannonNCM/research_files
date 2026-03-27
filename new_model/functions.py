@@ -16,9 +16,9 @@ from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 #function for splitting data
 def split(type, output_file, name):
     db = read(output_file, ':')
+    isolated_atoms = [atoms for atoms in db if len(atoms)==1]
+    structures = [atoms for atoms in db if len(atoms)>1]
     if type == 'rnd':
-        isolated_atoms = [atoms for atoms in db if len(atoms)==1]
-        structures = [atoms for atoms in db if len(atoms)>1]
         random.seed(42)
         random.shuffle(structures)
         split1 = int(0.8*len(structures))
@@ -26,6 +26,12 @@ def split(type, output_file, name):
         test_rnd = structures[split1:]
         write(f'model_{name}/train_rnd.xyz', train_rnd)
         write(f'model_{name}/test_rnd.xyz', test_rnd)
+    elif type == 'rnd_e':
+        for a in structures:
+            num_atoms = len(a)
+            toten = a.info['REF_energy']
+            e_per_atom = toten/num_atoms
+
     else:
         n = len(db)
         split = int(0.8*n)
@@ -80,11 +86,11 @@ def file_read(file_name):
     for a in file:
         n_atoms = len(a)
         ref_e = a.info['REF_energy']
-        #ref_e_atom = ref_e / n_atoms
+        ref_e_atom = ref_e / n_atoms
         #ref_e_meV = ref_e*1000
         #ref_e_meV_atom = ref_e_meV / n_atoms
 
-        data.append({'n_atoms':n_atoms, 'REF_energy':ref_e#, 'REF_e/atom_eV':ref_e_atom, 'ref_energy_meV':ref_e_meV, 'REF_e/atom_meV':ref_e_meV_atom
+        data.append({'n_atoms':n_atoms, 'REF_energy':ref_e, 'REF_e/atom_eV':ref_e_atom, #'ref_energy_meV':ref_e_meV, 'REF_e/atom_meV':ref_e_meV_atom
                      })
 
     df = pd.DataFrame(data)
