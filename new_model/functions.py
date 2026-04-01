@@ -15,7 +15,7 @@ from collections import defaultdict
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 
 #function for splitting data
-def split(type, output_file, name, folder):
+def split(type, output_file, name):
     db = read(output_file, ':')
     isolated_atoms = [atoms for atoms in db if len(atoms)==1]
     structures = [atoms for atoms in db if len(atoms)>1]
@@ -25,8 +25,8 @@ def split(type, output_file, name, folder):
         split1 = int(0.8*len(structures))
         train_rnd = isolated_atoms+structures[:split1]
         test_rnd = structures[split1:]
-        write(f'model_{name}/{folder}/train_rnd.xyz', train_rnd)
-        write(f'model_{name}/{folder}/test_rnd.xyz', test_rnd)
+        write(f'model_{name}/train_{type}.xyz', train_rnd)
+        write(f'model_{name}/test_{type}.xyz', test_rnd)
     elif type == 'rnd_e':
         data = []
         for a in structures:
@@ -52,13 +52,13 @@ def split(type, output_file, name, folder):
             train_rnd.extend(atoms_list[:split])
             test_rnd.extend(atoms_list[split:])
         train_rnd = isolated_atoms + train_rnd
-        write(f'model_{name}/{folder}/train_rnd_e.xyz', train_rnd)
-        write(f'model_{name}/{folder}/test_rnd_e.xyz', test_rnd)
+        write(f'model_{name}/train_{type}.xyz', train_rnd)
+        write(f'model_{name}/test_{type}.xyz', test_rnd)
     else:
         n = len(db)
         split = int(0.8*n)
-        write(f'model_{name}/{folder}/train_01.xyz', db[:split])
-        write(f'model_{name}/{folder}/test_01.xyz', db[split:])
+        write(f'model_{name}/train_{type}.xyz', db[:split])
+        write(f'model_{name}/test_{type}.xyz', db[split:])
 
 
 #function to set the names of the tags in the xyz file
@@ -121,8 +121,8 @@ def file_read(file_name):
 
 
 #function for extracting information from the evaluation of the model
-def eval_read(name,model_name, file, folder):
-    file = read(f'model_{name}/{folder}/test_res/{model_name}_{file}.xyz', index=':')
+def eval_read(model_name, file, path):
+    file = read(f'{path}/test_res/{model_name}_{file}.xyz', index=':')
     
     data = []
     for a in file:
@@ -159,7 +159,7 @@ def errors(df,file, ref, pred):
     return results
 
 
-#### ________________________________
+#### --------------------------------
 #### PLOTTING FUNCTIONS 
 #### ________________________________
 
@@ -178,7 +178,7 @@ def plot_mae(dataframe, x, y):
 
 
 #function to plot the training and validation errors as funcionts of epochs
-def plot_loss(dataframes, x, y, model_name, name, folder):
+def plot_loss(dataframes, x, y, model_name, path):
     colors=plt.cm.tab10.colors
     n=len(y)
 
@@ -194,12 +194,12 @@ def plot_loss(dataframes, x, y, model_name, name, folder):
         #filename = f'img_res/{model_name}_{label}_loss.pdf'
         #plt.savefig(filename)
 
-    filename = f'model_{name}/{folder}/img_res/{model_name}_loss.pdf'
+    filename = f'{path}/img_res/{model_name}_loss.pdf'
     plt.savefig(filename)
 
 
 #function for plotting the reference vs predicted energies
-def plot_comparison(dfs, x_cols, y_cols, titles, label, model_name, name, folder):
+def plot_comparison(dfs, x_cols, y_cols, titles, label, model_name, path):
     row = len(dfs)
     cols = len(x_cols)
 
@@ -221,5 +221,5 @@ def plot_comparison(dfs, x_cols, y_cols, titles, label, model_name, name, folder
             axs.set_ylabel(f'{y}')
             axs.set_title(f'{title}')
 
-    fig_name = f'model_{name}/{folder}/img_res/{model_name}_{label}.pdf'
+    fig_name = f'{path}/img_res/{model_name}_{label}.pdf'
     plt.savefig(fig_name)
