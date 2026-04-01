@@ -15,7 +15,7 @@ from collections import defaultdict
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 
 #function for splitting data
-def split(type, output_file, name):
+def split(type, output_file, name, folder):
     db = read(output_file, ':')
     isolated_atoms = [atoms for atoms in db if len(atoms)==1]
     structures = [atoms for atoms in db if len(atoms)>1]
@@ -25,8 +25,8 @@ def split(type, output_file, name):
         split1 = int(0.8*len(structures))
         train_rnd = isolated_atoms+structures[:split1]
         test_rnd = structures[split1:]
-        write(f'model_{name}/train_rnd.xyz', train_rnd)
-        write(f'model_{name}/test_rnd.xyz', test_rnd)
+        write(f'model_{name}/{folder}/train_rnd.xyz', train_rnd)
+        write(f'model_{name}/{folder}/test_rnd.xyz', test_rnd)
     elif type == 'rnd_e':
         data = []
         for a in structures:
@@ -38,32 +38,28 @@ def split(type, output_file, name):
         data1 = pd.DataFrame(data)
         #determinamos los minimos y maximos para los bins
         counts, bins = np.histogram(data1)
-
         bin_indx = np.digitize(data1['energy/atom'], bins)
         bin_dict = defaultdict(list)
         for idx, bin_id in enumerate(bin_indx):
             bin_dict[bin_id].append(structures[idx])
-
         random.seed(42)
-
         train_rnd = []
         test_rnd = []
         for bin_id, atoms_list in bin_dict.items():
             n = len(atoms_list)
             split = max(1,int(0.8 * n))
-            
             random.shuffle(atoms_list)
-            
             train_rnd.extend(atoms_list[:split])
             test_rnd.extend(atoms_list[split:])
         train_rnd = isolated_atoms + train_rnd
-        write(f'model_{name}/train_rnd_e.xyz', train_rnd)
-        write(f'model_{name}/test_rnd_e.xyz', test_rnd)
+        write(f'model_{name}/{folder}/train_rnd_e.xyz', train_rnd)
+        write(f'model_{name}/{folder}/test_rnd_e.xyz', test_rnd)
     else:
         n = len(db)
         split = int(0.8*n)
-        write(f'model_{name}/train_01.xyz', db[:split])
-        write(f'model_{name}/test_01.xyz', db[split:])
+        write(f'model_{name}/{folder}/train_01.xyz', db[:split])
+        write(f'model_{name}/{folder}/test_01.xyz', db[split:])
+
 
 #function to set the names of the tags in the xyz file
 def file_format(input_file, output_file):
@@ -125,8 +121,8 @@ def file_read(file_name):
 
 
 #function for extracting information from the evaluation of the model
-def eval_read(name,model_name, file):
-    file = read(f'model_{name}/test_res/{model_name}_{file}.xyz', index=':')
+def eval_read(name,model_name, file, folder):
+    file = read(f'model_{name}/{folder}/test_res/{model_name}_{file}.xyz', index=':')
     
     data = []
     for a in file:
@@ -182,7 +178,7 @@ def plot_mae(dataframe, x, y):
 
 
 #function to plot the training and validation errors as funcionts of epochs
-def plot_loss(dataframes, x, y, model_name, name):
+def plot_loss(dataframes, x, y, model_name, name, folder):
     colors=plt.cm.tab10.colors
     n=len(y)
 
@@ -198,12 +194,12 @@ def plot_loss(dataframes, x, y, model_name, name):
         #filename = f'img_res/{model_name}_{label}_loss.pdf'
         #plt.savefig(filename)
 
-    filename = f'model_{name}/img_res/{model_name}_loss.pdf'
+    filename = f'model_{name}/{folder}/img_res/{model_name}_loss.pdf'
     plt.savefig(filename)
 
 
 #function for plotting the reference vs predicted energies
-def plot_comparison(dfs, x_cols, y_cols, titles, label, model_name, name):
+def plot_comparison(dfs, x_cols, y_cols, titles, label, model_name, name, folder):
     row = len(dfs)
     cols = len(x_cols)
 
@@ -225,5 +221,5 @@ def plot_comparison(dfs, x_cols, y_cols, titles, label, model_name, name):
             axs.set_ylabel(f'{y}')
             axs.set_title(f'{title}')
 
-    fig_name = f'model_{name}/img_res/{model_name}_{label}.pdf'
+    fig_name = f'model_{name}/{folder}/img_res/{model_name}_{label}.pdf'
     plt.savefig(fig_name)

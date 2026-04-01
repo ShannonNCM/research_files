@@ -2,14 +2,14 @@ model: ScaleShiftMACE
 num_channels: 32
 max_L: 0
 r_max: 4.0
-name: model_rnd_e_ScaleShiftMACE_lr0.0005_40epochs_10batch
-model_dir: model_Fe_Si_B_260311
-log_dir: model_Fe_Si_B_260311/log
-checkpoints_dir: model_Fe_Si_B_260311/checkpoints
-results_dir: model_Fe_Si_B_260311/results
-train_file: model_Fe_Si_B_260311/train_rnd_e.xyz
+name: model_01_scmace_lr0.0005_40_10
+model_dir: model_Fe_Si_B_260311/scmace_0.0005_40_10_01
+log_dir: model_Fe_Si_B_260311/scmace_0.0005_40_10_01/log
+checkpoints_dir: model_Fe_Si_B_260311/scmace_0.0005_40_10_01/checkpoints
+results_dir: model_Fe_Si_B_260311/scmace_0.0005_40_10_01/results
+train_file: model_Fe_Si_B_260311/train_01.xyz
 valid_fraction: 0.01
-test_file: model_Fe_Si_B_260311/test_rnd_e.xyz
+test_file: model_Fe_Si_B_260311/test_01.xyz
 energy_key: REF_energy
 forces_key: REF_forces
 batch_size: 10
@@ -18,5 +18,3 @@ optimizer: adam
 lr: 0.0005
 device: cpu
 seed: 123
-config_type_weights:
-  highE: 0.2
