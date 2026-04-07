@@ -119,6 +119,15 @@ def file_read(file_name):
     df = pd.DataFrame(data)
     return df
 
+#function to check the distribution of structures in the file
+def dist_analysis(file_name):
+    file = read(file_name, index=':')
+    config_counts = {}
+    for atoms in file:
+        config = atoms.get_chemical_formula()
+        config_counts[config] = config_counts.get(config, 0)+1
+    return config_counts
+
 
 #function for extracting information from the evaluation of the model
 def eval_read(model_name, file, path):
@@ -135,8 +144,9 @@ def eval_read(model_name, file, path):
         mace_f = a.arrays['MACE_forces']
         ref_e_meV_atom = ref_e_meV / n_atoms
         mace_e_meV_atom = mace_e_meV / n_atoms
+        config_type = a.info.get('config_type')
 
-        data.append({'n_atoms':n_atoms, 'REF_energy':ref_e, 'MACE_energy':mace_e, 'ref_energy_meV':ref_e_meV, 'mace_energy_meV':mace_e_meV, 'REF_e/atom_meV':ref_e_meV_atom, 'MACE_e/atom_meV':mace_e_meV_atom, 'REF_forces':ref_f, 'MACE_forces':mace_f})
+        data.append({'config':config_type, 'n_atoms':n_atoms, 'REF_energy':ref_e, 'MACE_energy':mace_e, 'ref_energy_meV':ref_e_meV, 'mace_energy_meV':mace_e_meV, 'REF_e/atom_meV':ref_e_meV_atom, 'MACE_e/atom_meV':mace_e_meV_atom, 'REF_forces':ref_f, 'MACE_forces':mace_f})
 
     df = pd.DataFrame(data)
     return df
@@ -150,13 +160,23 @@ def forces(df):
     return new_df
 
 
-#function to calculate the errors
+#functions to calculate the errors
 def errors(df,file, ref, pred):
     rmse = np.sqrt(mean_squared_error(df[ref],df[pred]))
     mae = mean_absolute_error(df[ref],df[pred])
     r2 = r2_score(df[ref],df[pred])
+    
     results = pd.DataFrame({'error':file, 'rmse':[rmse], 'mae':[mae], 'r2':r2})
     return results
+
+def config_errors(df, file, ref, pred):
+    mae_config = df.groupby(['config']).apply(lambda x: pd.Series({
+        'error':file,
+        'n_configs': len(x),
+        'rmse': np.sqrt(mean_squared_error(x[ref],x[pred])),
+        'mae': mean_absolute_error(x[ref],x[pred])}), include_groups=False)
+    
+    return mae_config
 
 
 #### --------------------------------
