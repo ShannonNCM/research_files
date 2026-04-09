@@ -174,7 +174,7 @@ def config_errors(df, file, ref, pred):
         'error':file,
         'n_configs': len(x),
         'rmse': np.sqrt(mean_squared_error(x[ref],x[pred])),
-        'mae': mean_absolute_error(x[ref],x[pred])}), include_groups=False)
+        'mae': mean_absolute_error(x[ref],x[pred])}), include_groups=False).reset_index()
     
     return mae_config
 
