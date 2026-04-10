@@ -140,8 +140,8 @@ def eval_read(model_name, file, path):
         mace_e = a.info['MACE_energy']
         ref_e_meV = ref_e*1000
         mace_e_meV = mace_e*1000
-        ref_f = a.arrays['REF_forces']
-        mace_f = a.arrays['MACE_forces']
+        ref_f = a.arrays['REF_forces']*1000
+        mace_f = a.arrays['MACE_forces']*1000
         ref_e_meV_atom = ref_e_meV / n_atoms
         mace_e_meV_atom = mace_e_meV / n_atoms
         config_type = a.info.get('config_type')
