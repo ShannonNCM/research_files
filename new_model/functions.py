@@ -126,7 +126,8 @@ def dist_analysis(file_name):
     for atoms in file:
         config = atoms.get_chemical_formula()
         config_counts[config] = config_counts.get(config, 0)+1
-    return config_counts
+        df = pd.DataFrame(list(config_counts.items()), columns=['config', 'n_config'])
+    return df
 
 
 #function for extracting information from the evaluation of the model
