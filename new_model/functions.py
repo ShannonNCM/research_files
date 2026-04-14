@@ -14,6 +14,12 @@ import random
 from collections import defaultdict
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 
+''' 
+--------------------------------
+DATA ARRANGING FUNCTIONS
+________________________________ 
+'''
+
 #function for splitting data
 def split(type, output_file, name):
     db = read(output_file, ':')
@@ -160,6 +166,19 @@ def forces(df):
     new_df = pd.DataFrame({'REF_force':ref_f, 'MACE_force':mace_f})
     return new_df
 
+#function to exclude specific configuration from the data
+def exclude_config(file, structure, name):
+    db = read(file, ':')
+    include_data = [atoms for atoms in db if atoms.info.get('config_type') != structure]
+    name_file = os.path.splitext(os.path.basename(file))[0]
+    write(f'model_{name}/{name_file}_no_{structure}.xyz', include_data)
+
+
+''' 
+--------------------------------
+ERROR CALCULATION FUNCTIONS
+________________________________ 
+'''
 
 #functions to calculate the errors
 def errors(df,file, ref, pred):
@@ -179,10 +198,11 @@ def config_errors(df, file, ref, pred):
     
     return mae_config
 
-
-#### --------------------------------
-#### PLOTTING FUNCTIONS 
-#### ________________________________
+'''
+--------------------------------
+PLOTTING FUNCTIONS 
+________________________________
+'''
 
 #function for plotting the mean absolute error for forces and energy
 def plot_mae(dataframe, x, y):
