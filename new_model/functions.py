@@ -190,11 +190,11 @@ def errors(df,file, ref, pred):
     return results
 
 def config_errors(df, file, ref, pred):
-    mae_config = df.groupby(['config']).apply(lambda x: pd.Series({
+    mae_config = df.groupby(['config']).apply(lambda x, **kwargs: pd.Series({
         'error':file,
         'n_configs': len(x),
         'rmse': np.sqrt(mean_squared_error(x[ref],x[pred])),
-        'mae': mean_absolute_error(x[ref],x[pred])}), include_groups=False).reset_index()
+        'mae': mean_absolute_error(x[ref],x[pred])})).reset_index()
     
     return mae_config
 
