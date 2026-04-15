@@ -264,3 +264,34 @@ def plot_comparison(dfs, x_cols, y_cols, titles, label, model_name, path):
 
     fig_name = f'{path}/img_res/{model_name}_{label}.pdf'
     plt.savefig(fig_name)
+
+
+'''
+--------------------------------------------
+COMPARISON NOTEBOOK FUNCTIONS
+____________________________________________
+'''
+
+#functions for reading excel files
+def read_excel(files, sheet):
+    dfs = []
+    for file in files:
+        data = pd.read_excel(file, sheet_name=sheet, index_col=0)
+        name = os.path.splitext(os.path.basename(file))[0]
+        data['model'] = name
+        match = re.search(r'lr[\d.]+_(\d+)_', name)
+        if match:
+            data['epochs'] = int(match.group(1))
+        match_model = re.search(r'model_.*?_e_(.*?)_lr', name)
+        if match_model:
+            data['id'] = match_model.group(1)
+        dfs.append(data)
+    df = pd.concat(dfs,ignore_index=True)
+    return df
+
+
+#function to obtain the minimum value of an error in a dataframe
+def min(df, error):
+    df = df.pivot(index='model', columns='error', values=error)
+    df1 = df.apply(lambda x: pd.Series({'model':x.idxmin(), error:x.min()})).T
+    return df1
