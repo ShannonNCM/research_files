@@ -13,6 +13,8 @@ import re
 import random
 from collections import defaultdict
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
+import openpyxl
+import glob, re
 
 ''' 
 --------------------------------
@@ -292,6 +294,45 @@ def read_excel(files, sheet):
 
 #function to obtain the minimum value of an error in a dataframe
 def min(df, error):
-    df = df.pivot(index='model', columns='error', values=error)
-    df1 = df.apply(lambda x: pd.Series({'model':x.idxmin(), error:x.min()})).T
+    df = df.pivot(index='model', columns='error', values=error) #this rearranges the dataframe
+    df1 = df.apply(lambda x: pd.Series({'model':x.idxmin(), error:x.min()})).T #this finds the min value for a specific error
     return df1
+
+# function for plotting the global errors
+def plot_global_error(dfs,x,y_cols, df_labels, titles, tag):
+    fig, axes = plt.subplots(1,len(dfs), sharey=True)
+
+    if len(dfs) == 1:
+        axes = [axes]
+
+    handles =[]
+    labels = []
+    markers = {'mae': 'o', 'rmse': 'x'}
+    #esto es lo que acabo de agregar
+    #colors = dict(zip(df_labels, ['blue', 'red', 'green', 'orange']))
+    model_colors = {'scmace': 'blue', 'scmace_nofe8b4':'red', 'matpes':'green', 'matpes_nofe8b4': 'orange'}
+    #
+
+    for i, group in enumerate(dfs):
+        ax = axes[i]
+        for df, df_label in zip(group, df_labels):
+            for y in y_cols:
+                label = f'{y}_{df_label}'
+                #color = colors.get(df_label)
+                color = model_colors.get(df_label)
+                line = ax.scatter(df[x], df[y], marker=markers.get(y,'o'), color=color, label=f'{y}_{df_label}')
+                if label not in labels:
+                    handles.append(line)
+                    labels.append(label)
+        ax.set_xlabel(f'{x}')
+        ax.set_title(titles[i])
+    
+    if tag == 'energy':
+        units = 'meV/atom'
+    elif tag == 'force': 
+        units = r'meV/$\AA$'
+    
+    fig.legend(handles, labels, bbox_to_anchor=(01.25,0.6), fontsize=7)
+    fig.suptitle(f'MAE and RMSE for {tag} in {units}')
+    plt.tight_layout()
+
