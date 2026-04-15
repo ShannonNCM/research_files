@@ -16,6 +16,9 @@ from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 import openpyxl
 import glob, re
 
+
+''' ------------------------ FUNCTIONS USED DURING TRAINING --------------------'''
+
 ''' 
 --------------------------------
 DATA ARRANGING FUNCTIONS
@@ -268,6 +271,8 @@ def plot_comparison(dfs, x_cols, y_cols, titles, label, model_name, path):
     plt.savefig(fig_name)
 
 
+''' ------------------------ FUNCTIONS USED TO COMPARE RESULTS --------------------'''
+
 '''
 --------------------------------------------
 COMPARISON NOTEBOOK FUNCTIONS
@@ -298,7 +303,7 @@ def min(df, error):
     df1 = df.apply(lambda x: pd.Series({'model':x.idxmin(), error:x.min()})).T #this finds the min value for a specific error
     return df1
 
-# function for plotting the global errors
+# function for plotting the global errors vs epochs
 def plot_global_error(dfs,x,y_cols, df_labels, titles, tag):
     fig, axes = plt.subplots(1,len(dfs), sharey=True)
 
@@ -336,3 +341,24 @@ def plot_global_error(dfs,x,y_cols, df_labels, titles, tag):
     fig.suptitle(f'MAE and RMSE for {tag} in {units}')
     plt.tight_layout()
 
+#function for plotting erros vs number of epochs
+def plot_config_error(dfs, y, titles, error, model_name):
+    fig, axes = plt.subplots(1, len(dfs), figsize=(10,6), sharey=True)
+    if len(dfs) == 1:
+        axes = [axes]
+
+    for i, df in enumerate(dfs):
+        ax = axes[i]
+        for config, group in df.groupby('config'):
+            n_config = group['n_configs'].iloc[0]
+            label = f'{config} (n={n_config})'
+            ax.scatter(group['epochs'], group[y],marker='o',label=label)
+        ax.set_xlabel('Epochs')
+        ax.set_title(titles[i])
+
+        handles, labels = ax.get_legend_handles_labels()
+        unique = dict(zip(labels,handles))
+
+        ax.legend(unique.values(), unique.keys(), fontsize=7, bbox_to_anchor=(0.5,-0.1))
+    fig.suptitle(f'{error}_(meV/atom) for {model_name} model')
+    plt.tight_layout()
