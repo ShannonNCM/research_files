@@ -271,6 +271,7 @@ def plot_comparison(dfs, x_cols, y_cols, titles, label, model_name, path):
     plt.savefig(fig_name)
 
 
+
 ''' ------------------------ FUNCTIONS USED TO COMPARE RESULTS --------------------'''
 
 '''
@@ -304,7 +305,75 @@ def min(df, error):
     return df1
 
 # function for plotting the global errors vs epochs
-def plot_global_error(dfs,x,y_cols, df_labels, titles, tag):
+def plot_global_error(dfs,y_cols, df_labels, titles, tag):
+    filters = [f'test_{tag}', f'train_{tag}']
+    fig, axes = plt.subplots(1,len(filters), sharey=True)
+
+    if len(filters) == 1:
+        axes = [axes]
+
+    handles =[]
+    labels = []
+    markers = {'mae': 'o', 'rmse': 'x'}
+    #esto es lo que acabo de agregar
+    #colors = plt.cm.tab10.colors
+    colors = dict(zip(df_labels, ['blue', 'red', 'green', 'orange']))
+    #model_colors = {'scmace': 'blue', 'scmace_nofe8b4':'red', 'matpes':'green', 'matpes_nofe8b4': 'orange'}
+
+    for i, filter in enumerate(filters):
+        ax = axes[i]
+        for df, df_label in zip(dfs, df_labels):
+            df_f = df.query('error == @filter')
+            for y in y_cols:
+                label = f'{y}_{df_label}'
+                #color1 = colors[df_label % len(colors)]
+                color = colors.get(df_label)
+                #color = model_colors.get(df_label)
+                line = ax.scatter(df_f['epochs'], df_f[y], marker=markers.get(y,'o'), color=color, label=f'{y}_{df_label}')
+                if label not in labels:
+                    handles.append(line)
+                    labels.append(label)
+        ax.set_xlabel('Epochs')
+        ax.set_title(titles[i])
+        #ax.set_xlim(xmax=max)
+    
+    if tag == 'energy':
+        units = 'meV/atom'
+    elif tag == 'force': 
+        units = r'meV/$\AA$'
+    
+    fig.legend(handles, labels, bbox_to_anchor=(01.25,0.6), fontsize=7)
+    fig.suptitle(f'MAE and RMSE for {tag} in {units}')
+    plt.tight_layout()
+
+
+#function for plotting the error for each configuration
+def plot_config_error(dfs, y, titles, error, model_names, tag):
+    filters = [f'test_{tag}', f'train_{tag}']
+    fig, axes = plt.subplots(len(dfs), len(filters), sharey=True, layout='constrained', figsize=(4*len(dfs),4*len(filters)))
+
+    if len(dfs) == 1:
+        axes = [axes]
+
+    for i, (df, model_name) in enumerate(zip(dfs, model_names)):
+        for j, filter in enumerate(filters):
+            ax = axes[i][j]
+            df_f = df[df['error'] == filter]
+            for config, group in df_f.groupby('config'):
+                n_config = group['n_configs'].iloc[0]
+                label = f'{config} (n={n_config})'
+                ax.scatter(group['epochs'], group[y],marker='o',label=label)
+            ax.set_xlabel('Epochs')
+            ax.set_title(f'{model_name} {titles[j]}')
+            handles, labels = ax.get_legend_handles_labels()
+            unique = dict(zip(labels,handles))
+            #plt.tight_layout()
+        ax.legend(unique.values(), unique.keys(), fontsize=7, loc='center right', bbox_to_anchor=(1.5,0.5))
+    fig.suptitle(f'{error} for {tag} in (meV/atom)')
+
+
+
+'''def plot_global_error(dfs,x,y_cols, df_labels, titles, tag):
     fig, axes = plt.subplots(1,len(dfs), sharey=True)
 
     if len(dfs) == 1:
@@ -340,8 +409,9 @@ def plot_global_error(dfs,x,y_cols, df_labels, titles, tag):
     fig.legend(handles, labels, bbox_to_anchor=(01.25,0.6), fontsize=7)
     fig.suptitle(f'MAE and RMSE for {tag} in {units}')
     plt.tight_layout()
+'''
 
-#function for plotting erros vs number of epochs
+'''#function for plotting erros vs number of epochs
 def plot_config_error(dfs, y, titles, error, model_name):
     fig, axes = plt.subplots(1, len(dfs), figsize=(10,6), sharey=True)
     if len(dfs) == 1:
@@ -361,4 +431,4 @@ def plot_config_error(dfs, y, titles, error, model_name):
 
         ax.legend(unique.values(), unique.keys(), fontsize=7, bbox_to_anchor=(0.5,-0.1))
     fig.suptitle(f'{error}_(meV/atom) for {model_name} model')
-    plt.tight_layout()
+    plt.tight_layout()'''
