@@ -15,8 +15,8 @@ os.makedirs('test_res', exist_ok=True) #creates a folder to store the files of t
 import functions as f #import functions used in this notebook
 
 #setting the loop for running
-#epoch_values = {40, 60, 90, 100, 120}
-epoch_values = {1,2}
+epoch_values = {40, 60, 80, 90, 100, 120}
+#epoch_values = {1,2}
 
 for epochs in epoch_values:
     ###############################################################
