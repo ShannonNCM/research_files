@@ -23,9 +23,9 @@ for epochs in epoch_values:
     #setting the model name based on model number and epochs
     device = 'cuda'
     model = "MACE-matpes-pbe-omat-ft"
-    model_id = 'matpes_nofe8b4_03'
+    model_id = 'matpes_nofe8b4'
     learning_rate = 1e-4
-    num_epoch = 80 #number of epochs used for training
+    num_epoch = epochs #number of epochs used for training
     batch_size = 10 #batch size for training
     seed = 123
     folder = f'{model_id}_{learning_rate}_{num_epoch}_{batch_size}_{type}'
