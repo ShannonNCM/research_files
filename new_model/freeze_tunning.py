@@ -15,8 +15,8 @@ os.makedirs('test_res', exist_ok=True) #creates a folder to store the files of t
 import functions as f #import functions used in this notebook
 
 #setting the loop for running
-epoch_values = {100, 110}
-#epoch_values = {1,2}
+#epoch_values = {40, 60, 80, 100, 200}
+epoch_values = {1,2}
 
 for epochs in epoch_values:
     ###############################################################
@@ -24,10 +24,11 @@ for epochs in epoch_values:
     ###############################################################
     name = "Fe_Si_B_260311"
     type = 'rnd_e'
+    frozen_layers = 4
     #setting the model name based on model number and epochs
-    device = 'cuda'
+    device = 'cpu'
     model = "MACE-matpes-pbe-omat-ft"
-    model_id = 'matpes_nofe8b4_freeze'
+    model_id = f'matpes_nofe8b4_freeze_{frozen_layers}'
     learning_rate = 1e-4
     num_epoch = epochs #number of epochs used for training
     batch_size = 10 #batch size for training
@@ -52,7 +53,7 @@ for epochs in epoch_values:
     config = {
         'foundation_model': f'{model}.model',
         'multiheads_finetuning': False,
-        'freeze': 6,
+        'freeze': frozen_layers,
         "name": model_name,
         "model_dir": path,
         "log_dir": f"{path}/log",
