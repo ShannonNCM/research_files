@@ -16,7 +16,8 @@ os.makedirs('test_res', exist_ok=True) #creates a folder to store the files of t
 import functions as f #import functions used in this notebook
 
 #setting the loop for running
-epoch_values = [1, 2] # Use a list to ensure ascending order for sequential training
+#epoch_values = [1,2] # Use a list to ensure ascending order for sequential training
+epoch_values = list(range(40, 501, 20))
 
 for epochs in epoch_values:
     ###############################################################
@@ -25,7 +26,7 @@ for epochs in epoch_values:
     name = "Fe_Si_B_260311"
     type = 'rnd_e'
     frozen_layers = 4
-    device = 'cpu'
+    device = 'cuda'
     model = "MACE-matpes-pbe-omat-ft"
     model_id = f'matpes_nofe8b4_freeze_{frozen_layers}'
     learning_rate = 1e-4
