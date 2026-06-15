@@ -18,7 +18,7 @@ os.makedirs('test_res', exist_ok=True) #creates a folder to store the files of t
 import functions as f #import functions used in this notebook
 
 # Setting the loop milestones (e.g., [50, 100, 150... 500])
-epoch_values = [1, 2]
+epoch_values = list(range(40, 501, 20))
 
 for epochs in epoch_values:
     ###############################################################
@@ -27,7 +27,7 @@ for epochs in epoch_values:
     name = "Fe_Si_B_260311"
     type = 'rnd_e'
     frozen_layers = 4
-    device = 'cpu'  # Change to 'cuda' if running on GPU
+    device = 'cuda'  # Change to 'cuda' if running on GPU
     model = "MACE-matpes-pbe-omat-ft"
     model_id = f'matpes_nofe8b4_freeze_{frozen_layers}'
     learning_rate = 1e-4
@@ -77,8 +77,7 @@ for epochs in epoch_values:
         "lr": learning_rate,
         "device": device,
         "seed": seed,
-        "restart_latest": True,             # Forces optimizer recovery
-        "wandb_resume": True                # Prevents WandB from creating duplicate split runs
+        "restart_latest": True             # Forces optimizer recovery
     }
     with open(f"model_{name}/config_freeze.yml", "w") as f_yml:
         yaml.dump(config, f_yml, sort_keys=False)
@@ -97,11 +96,6 @@ for epochs in epoch_values:
         logging.getLogger().handlers.clear()
         sys.argv = ['program', '--config', config_file_path]
         mace_run_train_main()
-
-    # Browser-safe clean notification print
-    sys.stdout.flush()
-    display(Markdown(f"### 🚀 **Running training up to continuous milestone target: {epochs} epochs**"))
-    sys.stdout.flush()
 
     train_mace(f'model_{name}/config_freeze.yml') 
 

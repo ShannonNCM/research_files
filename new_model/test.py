@@ -16,8 +16,8 @@ os.makedirs('test_res', exist_ok=True) #creates a folder to store the files of t
 import functions as f #import functions used in this notebook
 
 #setting the loop for running
-#epoch_values = [1,2] # Use a list to ensure ascending order for sequential training
-epoch_values = list(range(40, 501, 20))
+epoch_values = [1,2] # Use a list to ensure ascending order for sequential training
+#epoch_values = list(range(40, 501, 20))
 
 for epochs in epoch_values:
     ###############################################################
@@ -37,7 +37,10 @@ for epochs in epoch_values:
     # Target folders matching your original exact naming format
     folder = f'{model_id}_{learning_rate}_{num_epoch}_{batch_size}_{type}'
     path = f'model_{name}/freeze_training/{folder}'
-    model_name = f'model_{type}_{model_id}_lr{learning_rate}_{num_epoch}_{batch_size}'
+    ### arregle esto porque si no, no hace bien lo de entrenar desde el ulitmo paso
+    model_name = f'model_{type}_{model_id}_lr{learning_rate}_continuous_{batch_size}'
+    ### tambien esto agregue
+    eval_model_name = f'model_{type}_{model_id}_lr{learning_rate}_{num_epoch}_{batch_size}'
     
     os.makedirs(path, exist_ok=True)
     os.makedirs(f'{path}/img_res', exist_ok=True)
@@ -104,17 +107,17 @@ for epochs in epoch_values:
     # to your target folder format so the rest of your script runs perfectly.
     ###############################################################
     os.makedirs(f"{path}/results", exist_ok=True)
-    os.makedirs(f"{path}/checkpoints", exist_ok=True)
+    #os.makedirs(f"{path}/checkpoints", exist_ok=True)
     
     # 1. Copy the training log text file
     shared_results_file = f'{shared_path}/results/{model_name}_run-{seed}_train.txt'
-    target_results_file = f'{path}/results/{model_name}_run-{seed}_train.txt'
+    target_results_file = f'{path}/results/{eval_model_name}_run-{seed}_train.txt'
     if os.path.exists(shared_results_file):
         shutil.copy(shared_results_file, target_results_file)
         
     # 2. Copy the newly compiled model file
     shared_compiled_model = f'{shared_path}/{model_name}.model'
-    target_compiled_model = f'{path}/{model_name}.model'
+    target_compiled_model = f'{path}/{eval_model_name}.model'
     if os.path.exists(shared_compiled_model):
         shutil.copy(shared_compiled_model, target_compiled_model)
 

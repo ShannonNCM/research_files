@@ -10,8 +10,8 @@ import pandas as pd
 import os
 import sys
 import re
-os.makedirs('img_res', exist_ok=True) #creates a folder to store the loss graphs
-os.makedirs('test_res', exist_ok=True) #creates a folder to store the files of the testing of the model
+#os.makedirs('img_res', exist_ok=True) #creates a folder to store the loss graphs
+#os.makedirs('test_res', exist_ok=True) #creates a folder to store the files of the testing of the model
 import functions as f #import functions used in this notebook
 
 #setting the loop for running
