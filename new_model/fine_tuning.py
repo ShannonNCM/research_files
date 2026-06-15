@@ -10,10 +10,12 @@ import pandas as pd
 import os
 import sys
 import re
+import shutil
 import functions as f #import functions used in this notebook
 
 #setting the loop for running
-epoch_values = {40, 60, 110}
+epoch_values = [1,2]
+#epoch_values = list(range(100, 501, 20))
 
 for epochs in epoch_values:
 
@@ -21,21 +23,25 @@ for epochs in epoch_values:
     name = "Fe_Si_B_260311"
     type = 'rnd_e'
     #setting the model name based on model number and epochs
-    device = 'cuda'
+    device = 'cpu'
     model = "MACE-matpes-pbe-omat-ft"
     model_id = 'matpes_nofe8b4'
     learning_rate = 1e-4
     num_epoch = epochs #number of epochs used for training
     batch_size = 10 #batch size for training
     seed = 123
+
     folder = f'{model_id}_{learning_rate}_{num_epoch}_{batch_size}_{type}'
     path = f'model_{name}/fine_tuning/{folder}'
-    train_file = f"model_{name}/train_{type}.xyz"
-    test_file = f"model_{name}/test_{type}.xyz"
     model_name = f'model_{type}_{model_id}_lr{learning_rate}_{num_epoch}_{batch_size}'
     os.makedirs(path, exist_ok=True)
     os.makedirs(f'{path}/img_res', exist_ok=True)
     os.makedirs(f'{path}/test_res', exist_ok=True)
+
+    #shared workspace directory to use previous checkpoints
+    shared_folder = f'{model_id}_{learning_rate}_continuous_{batch_size}_{type}'
+    shared_path = f'model_{name}/fine_tunning/{shared_folder}'
+    os.makedirs(f"{shared_path}/checkpoints", exist_ok=True)
 
     #setting new names for the training and test files
     structure = 'Fe8B4'
@@ -47,10 +53,10 @@ for epochs in epoch_values:
         'foundation_model': f'{model}.model',
         'multiheads_finetuning': False,
         "name": model_name,
-        "model_dir": path,
-        "log_dir": f"{path}/log",
-        "checkpoints_dir": f"{path}/checkpoints",
-        "results_dir": f"{path}/results",
+        "model_dir": shared_path,
+        "log_dir": f"{shared_path}/log",
+        "checkpoints_dir": f"{shared_path}/checkpoints",
+        "results_dir": f"{shared_path}/results",
         "train_file": train_file,
         "valid_fraction": 0.1,
         "test_file": test_file,
@@ -60,10 +66,11 @@ for epochs in epoch_values:
         "max_num_epochs": num_epoch,
         "lr":learning_rate,
         "device": device,
-        "seed": seed
+        "seed": seed,
+        "restart_latest": True
     }
-    with open(f"model_{name}/config_fine_tuning.yml", "w") as f:
-        yaml.dump(config, f, sort_keys=False)
+    with open(f"model_{name}/config_fine_tuning.yml", "w") as f_yml:
+        yaml.dump(config, f_yml, sort_keys=False)
 
     #Perform training
     import warnings
@@ -80,6 +87,21 @@ for epochs in epoch_values:
 
     #calling the function
     train_mace(f'model_{name}/config_fine_tuning.yml') # use the name of the config file that was created
+
+    #sync mace shared workspace outputs
+    os.makedirs(f"{path}/results", exist_ok=True)
+    os.makedirs(f"{path}/checkpoints", exist_ok=True)
+    #copy training log text file
+    shared_results_file = f'{shared_path}/results/{model_name}_run-{seed}_train.txt'
+    target_results_file = f'{path}/results/{model_name}_run-{seed}_train.txt'
+    if os.path.exists(shared_results_file):
+        shutil.copy(shared_results_file, target_results_file)
+    #copy the compiled model file
+    shared_compiled_model = f'{shared_path}/{model_name}.model'
+    target_compiled_model = f'{path}/{model_name}.model'
+    if os.path.exists(shared_compiled_model):
+        shutil.copy(shared_compiled_model, target_compiled_model)
+
 
     #reading the information on the results file
     results = f'{path}/results/{model_name}_run-{seed}_train.txt' #reading the file where the training results is stored
@@ -116,6 +138,8 @@ for epochs in epoch_values:
         if device == 'cuda':
             torch.cuda.empty_cache()
             batch_size = '1'
+        else:
+            batch_size = '10' # added safety catch for non-cuda fallback structures
     
         sys.argv=['program', '--configs', configs, '--model', model, '--output', output, '--device', device, '--batch_size', batch_size]
         mace_eval_configs_main()
