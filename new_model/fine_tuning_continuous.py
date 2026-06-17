@@ -17,7 +17,7 @@ from IPython.display import display, Markdown
 #os.makedirs('test_res', exist_ok=True) #creates a folder to store the files of the testing of the model
 import functions as f #import functions used in this notebook
 
-# Setting the loop milestones (e.g., [50, 100, 150... 500])
+#epoch_values = [1,2]
 epoch_values = list(range(40, 301, 20))
 
 for epochs in epoch_values:
@@ -37,7 +37,7 @@ for epochs in epoch_values:
     
     # Original evaluation paths
     folder = f'{model_id}_{learning_rate}_{num_epoch}_{batch_size}_{type}'
-    path = f'model_{name}/freeze_training/{folder}'
+    path = f'model_{name}/fine_tuning/{folder}'
     os.makedirs(path, exist_ok=True)
     os.makedirs(f'{path}/img_res', exist_ok=True)
     os.makedirs(f'{path}/test_res', exist_ok=True)
@@ -45,7 +45,7 @@ for epochs in epoch_values:
     # Shared workspace (this is to be able to have a continuous trianing)
     #   it is made so that the names stay the same at all iterations
     shared_folder = f'{model_id}_{learning_rate}_continuous_{batch_size}_{type}'
-    shared_path = f'model_{name}/freeze_training/{shared_folder}'
+    shared_path = f'model_{name}/fine_tuning/{shared_folder}'
     os.makedirs(f"{shared_path}/checkpoints", exist_ok=True)
 
     mace_internal_name = f'model_{type}_{model_id}_lr{learning_rate}_continuous_{batch_size}'
@@ -78,7 +78,7 @@ for epochs in epoch_values:
         "seed": seed,
         "restart_latest": True             # Forces optimizer recovery
     }
-    with open(f"model_{name}/config_freeze.yml", "w") as f_yml:
+    with open(f"model_{name}/config_fine_tuning.yml", "w") as f_yml:
         yaml.dump(config, f_yml, sort_keys=False)
 
 
