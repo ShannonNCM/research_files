@@ -18,7 +18,7 @@ os.makedirs('test_res', exist_ok=True) #creates a folder to store the files of t
 import functions as f #import functions used in this notebook
 
 # Setting the loop milestones (e.g., [50, 100, 150... 500])
-epoch_values = list(range(40, 501, 20))
+epoch_values = list(range(40, 301, 20))
 
 for epochs in epoch_values:
     ###############################################################
@@ -26,7 +26,7 @@ for epochs in epoch_values:
     ###############################################################
     name = "Fe_Si_B_260311"
     type = 'rnd_e'
-    frozen_layers = 4
+    frozen_layers = 6
     device = 'cuda'  # Change to 'cuda' if running on GPU
     model = "MACE-matpes-pbe-omat-ft"
     model_id = f'matpes_nofe8b4_freeze_{frozen_layers}'
