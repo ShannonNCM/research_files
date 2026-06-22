@@ -314,7 +314,7 @@ def plot_global_error(dfs,y_cols, df_labels, titles, tag):
 
     handles =[]
     labels = []
-    markers = {'mae': 'o', 'rmse': 'x'}
+    markers = {'mae': 'd', 'rmse': 'o'}
     #esto es lo que acabo de agregar
     #colors = plt.cm.tab10.colors
     colors = dict(zip(df_labels, ['blue', 'red', 'green', 'orange']))
