@@ -124,7 +124,7 @@ for epochs in epoch_values:
     ###############################################################
     # reading the information on the results file (UNTOUCHED)
     ###############################################################
-    results = f'{path}/results/{model_name}_run-{seed}_train.txt' 
+    results = f'{path}/results/{eval_model_name}_run-{seed}_train.txt' 
     data = [] 
     with open(results, 'r') as f_res:
         for line in f_res:

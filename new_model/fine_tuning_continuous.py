@@ -29,7 +29,7 @@ for epochs in epoch_values:
     device = 'cuda'
     #device = 'cpu'
     model = "MACE-matpes-pbe-omat-ft"
-    model_id = f'matpes_nofe8b4'
+    model_id = f'matpes_nofe8b4_1'
     learning_rate = 1e-4
     num_epoch = epochs 
     batch_size = 10 
