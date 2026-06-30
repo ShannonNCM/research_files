@@ -18,7 +18,7 @@ os.makedirs('test_res', exist_ok=True) #creates a folder to store the files of t
 import functions as f #import functions used in this notebook
 
 # Setting the loop milestones (e.g., [50, 100, 150... 500])
-epoch_values = list(range(820, 1001, 20))
+epoch_values = list(range(840, 1001, 20))
 
 for epochs in epoch_values:
     ###############################################################
