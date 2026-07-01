@@ -119,11 +119,11 @@ for epochs in epoch_values:
         shutil.copy(shared_compiled_model, target_compiled_model)
 
     # 3. ADD THIS: Backup the full uncompiled checkpoint for this specific milestone
-    '''os.makedirs(f"{path}/checkpoints", exist_ok=True)
+    os.makedirs(f"{path}/checkpoints", exist_ok=True)
     shared_epoch_checkpoint = f"{shared_path}/checkpoints/{mace_internal_name}_epoch-{num_epoch}.pt"
     target_epoch_checkpoint = f"{path}/checkpoints/{final_eval_name}_epoch-{num_epoch}.pt"
     if os.path.exists(shared_epoch_checkpoint):
-        shutil.copy(shared_epoch_checkpoint, target_epoch_checkpoint)'''
+        shutil.copy(shared_epoch_checkpoint, target_epoch_checkpoint)
 
 
     ###############################################################
