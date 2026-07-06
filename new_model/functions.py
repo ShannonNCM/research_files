@@ -329,7 +329,7 @@ def plot_global_error(dfs,y_cols, df_labels, titles, tag):
                 #color1 = colors[df_label % len(colors)]
                 color = colors.get(df_label)
                 #color = model_colors.get(df_label)
-                line = ax.scatter(df_f['epochs'], df_f[y], marker=markers.get(y,'o'), color=color, label=f'{y}_{df_label}')
+                line = ax.scatter(df_f['epochs'], df_f[y], marker=markers.get(y,'o'), color=color, label=f'{y}_{df_label}', s=10)
                 if label not in labels:
                     handles.append(line)
                     labels.append(label)
