@@ -18,7 +18,7 @@ os.makedirs('test_res', exist_ok=True) #creates a folder to store the files of t
 import functions as f #import functions used in this notebook
 
 # Setting the loop milestones (e.g., [50, 100, 150... 500])
-epoch_values = list(range(920, 1001, 20))
+epoch_values = list(range(1020, 1200, 20))
 
 for epochs in epoch_values:
     ###############################################################
@@ -34,6 +34,8 @@ for epochs in epoch_values:
     num_epoch = epochs 
     batch_size = 10 
     seed = 123
+    weight_e = 100.0
+    weight_f = 1000.0
     
     # 1. Your original evaluation paths (where files must end up for your parsing code)
     folder = f'{model_id}_{learning_rate}_{num_epoch}_{batch_size}_{type}'
@@ -77,7 +79,9 @@ for epochs in epoch_values:
         "lr": learning_rate,
         "device": device,
         "seed": seed,
-        "restart_latest": True             # Forces optimizer recovery
+        "restart_latest": True,             # Forces optimizer recovery
+        "energy_weight": weight_e,
+        "forces_weight": weight_f,
     }
     with open(f"model_{name}/config_freeze.yml", "w") as f_yml:
         yaml.dump(config, f_yml, sort_keys=False)
