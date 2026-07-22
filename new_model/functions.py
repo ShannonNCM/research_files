@@ -287,12 +287,26 @@ def read_excel(files, sheet):
         data = pd.read_excel(file, sheet_name=sheet, index_col=0)
         name = os.path.splitext(os.path.basename(file))[0]
         data['model'] = name
+        #print('Name: ', name)
+
+        #number of epochs
         match = re.search(r'lr[\d.]+_(\d+)_', name)
         if match:
             data['epochs'] = int(match.group(1))
+
+        # model name
         match_model = re.search(r'model_.*?_e_(.*?)_lr', name)
+        #print('Match_model: ', match_model)
         if match_model:
-            data['id'] = match_model.group(1)
+            model_id = match_model.group(1)
+            #print('Model id: ', model_id)
+            sub_id = re.search(r'(345|567)', name)
+            #print('sub id: ', sub_id)
+            if sub_id:
+                identifier = sub_id.group(1)
+                data['id'] = f'{model_id}_{identifier}'
+            else:
+                data['id'] = model_id
         dfs.append(data)
     df = pd.concat(dfs,ignore_index=True)
     return df
